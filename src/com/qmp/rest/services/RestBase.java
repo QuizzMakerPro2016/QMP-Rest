@@ -15,5 +15,4 @@ public class RestBase {
 		this.context = context;
 		KoHttp.kstart(context);
 	}
-
 }
