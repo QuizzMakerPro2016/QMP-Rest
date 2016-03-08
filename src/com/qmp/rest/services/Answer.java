@@ -26,13 +26,13 @@ public class Answer extends RestBase{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
 	public String index() {
-		return all();
+		return getAll();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public String all() {
+	public String getAll() {
 		KListObject<KReponse> answers = KoHttp.getDao(KReponse.class).readAll();
 		return new Gson().toJson(answers.asAL());
 	}
