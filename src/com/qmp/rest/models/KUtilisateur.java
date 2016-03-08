@@ -19,12 +19,23 @@ public class KUtilisateur extends KObject {
 	private String password;
 	private String prenom;
 	private KRang rang;
-	private KListObject<KGroupe_utilisateur> groupe_utilisateurs;
+	private KListObject<KGroupe> groupes;
+	
+	public KListObject<KGroupe> getGroupes() {
+		return groupes;
+	}
+	public void setGroupes(KListObject<KGroupe> groupes) {
+		this.groupes = groupes;
+	}
 	private KListObject<KRealisation> realisations;
 
 	public KUtilisateur() {
 		super();
-		//hasMany(KRealisation.class);hasMany(KGroupe_utilisateur.class);belongsTo(KRang.class);
+		groupes=new KListObject<KGroupe>(KGroupe.class);
+		hasMany(KRealisation.class);belongsTo(KRang.class);
+		//hasManyBelongsTo(KGroupe_utilisateur.class, KGroupe.class);
+		//hasManyBelongsTo("groupes", KGroupe.class, "id", "groupe_utilisateur", "idUtilisateur", KGroupe_utilisateur.class, "idGroupe");
+
 	}
 	/**
 	 * return the value of idRang
@@ -68,13 +79,7 @@ public class KUtilisateur extends KObject {
 	public KRang getRang(){
 		return this.rang;
 	}
-	/**
-	 * return the value of groupe_utilisateurs
-	 * @return groupe_utilisateurs
-	 */
-	public KListObject<KGroupe_utilisateur> getGroupe_utilisateurs(){
-		return this.groupe_utilisateurs;
-	}
+
 	/**
 	 * return the value of realisations
 	 * @return realisations
@@ -125,13 +130,7 @@ public class KUtilisateur extends KObject {
 	public void setRang(KRang aRang){
 		this.rang=aRang;
 	}
-	/**
-	 * set the value of groupe_utilisateurs
-	 * @param aGroupe_utilisateurs
-	 */
-	public void setGroupe_utilisateurs(KListObject<KGroupe_utilisateur> aGroupe_utilisateurs){
-		this.groupe_utilisateurs=aGroupe_utilisateurs;
-	}
+
 	/**
 	 * set the value of realisations
 	 * @param aRealisations

@@ -22,7 +22,7 @@ public class KGroupe_utilisateur extends KObject {
 
 	public KGroupe_utilisateur() {
 		super();
-		//belongsTo(KUtilisateur.class);belongsTo(KGroupe.class);
+		belongsTo(KUtilisateur.class);belongsTo(KGroupe.class);
 	}
 	/**
 	 * return the value of idGroupe
