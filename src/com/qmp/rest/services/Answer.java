@@ -1,31 +1,34 @@
 package com.qmp.rest.services;
 
-import javax.servlet.ServletContext;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-
-import net.ko.framework.KoHttp;
-import net.ko.kobject.KListObject;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.google.gson.Gson;
 import com.qmp.rest.models.KReponse;
 
+import net.ko.framework.KoHttp;
+import net.ko.kobject.KListObject;
+
+
 @Path("/answer")
 public class Answer extends RestBase{
 	
-	@Context
-	protected ServletContext context;
-
-	@Context
-	public void setServletContext(ServletContext context) {
-		this.context = context;
-		KoHttp.kstart(context);
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/")
+	public String index() {
+		return all();
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -42,6 +45,31 @@ public class Answer extends RestBase{
 		if (!answer.isLoaded())
 			return "null";
 		return new Gson().toJson(answer);
+	}
+	
+	@POST
+	@Path("/add")
+	@Consumes("application/x-www-form-urlencoded")
+	public String addOne(MultivaluedMap<String, String> formParams)
+			throws SQLException {
+		KReponse reponse = new KReponse();
+
+		String message = "{\"message\": \"Insert OK\"}";
+		for (String param : formParams.keySet()) {
+			try {
+				String value = formParams.get(param) + "";
+				value = value.replaceFirst("^\\[(.*)\\]$", "$1");
+				reponse.setAttribute(param, value, false);
+			} catch (SecurityException | IllegalArgumentException
+					| NoSuchFieldException | IllegalAccessException
+					| InvocationTargetException e) {
+				message = e.toString();
+
+			}
+		}
+
+		KoHttp.getDao(KReponse.class).create(reponse);
+		return message;
 	}
 
 }

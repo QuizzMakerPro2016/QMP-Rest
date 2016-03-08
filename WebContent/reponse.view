@@ -1,0 +1,10 @@
+<form action="http://localhost:8080/QMP-Rest/rest/answer/add" method="POST">
+{_fieldset}
+{question}
+{libelle}
+{idQuestion}
+{good}
+{_deleteCk}
+{_buttons}
+{/_fieldset}
+{/_form}
