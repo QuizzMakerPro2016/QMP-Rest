@@ -1,9 +1,9 @@
 #Fichier de configuration KoCreator version 1.0.0.26
-#Mon Mar 07 20:04:39 CET 2016
+#Tue Mar 08 10:08:44 CET 2016
 actionsName=action.do
 base=rest-qcm
 cacheType=1
-classes=domaine;groupe;groupe_questionnaire;groupe_utilisateur;question;questionnaire;rang;realisation;reponse;reponse_utilisateur;utilisateur
+classes=question
 clientDebug=false
 clientDebugOptions=true
 constraintsDepth=1
@@ -21,7 +21,7 @@ logFormat=html
 mappingFile=conf/mox.xml
 messagesFile=conf/validation/messages.properties
 nullValue=&nbsp;
-package=rest.qcm
+package=com.qmp.rest.models
 password=
 pluginVersion=1.0.0.26
 port=3306

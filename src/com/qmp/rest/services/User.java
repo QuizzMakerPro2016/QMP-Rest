@@ -1,73 +1,86 @@
 package com.qmp.rest.services;
 
-import javax.ws.rs.core.Context;
-
-import net.ko.framework.KoHttp;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 
 @Path("/user")
-public class User extends RestBase{
+public class User extends RestBase {
 
 	@GET
 	@Path("/all")
-	public void all(){
+	public String all() {
+		return null;
 		/* Todo */
 	}
-	
+
 	@GET
 	@Path("/{id}")
-	public void getOne(){
+	public String getOne() {
+		return null;
 		/* Todo */
-	}	
+	}
 
 	@GET
 	@Path("/{id}/quizzes")
-	public void quizzes(){
+	public String quizzes() {
+		return null;
 		/* Todo */
 	}
-	
+
 	@GET
 	@Path("/{id}/quizzes/done")
-	public void quizzesDone(){
+	public String quizzesDone() {
+		return null;
 		/* Todo */
-		
+
 	}
-	
+
 	@GET
 	@Path("/recovery/{mail}")
-	public void quizzesDone(){
+	public String recovery() {
+		return null;
 		/* Todo */
-		
+
 	}
-	
+
 	@GET
 	@Path("/{id}/groups")
-	public void groups(){
+	public String groups() {
+		return null;
 		/* Todo */
-		
+
 	}
-	
+
 	@GET
 	@Path("/checkConnected")
-	public void checkConnected(){
+	public String checkConnected() {
+		return null;
 		/* Todo */
 	}
-	
+
 	@POST
+	@Consumes()
 	@Path("/{id}")
-	public void updateUser(){
+	public String updateUser() {
+		return null;
 		/* Todo */
 	}
-	
+
 	@PUT
-	public void addUser(){
+	public String addUser() {
+		return null;
 		/* Todo */
 	}
-	
+
 	@DELETE
 	@Path("/{id}")
-	public void deleteUser(){
+	public String deleteUser() {
+		return null;
 		/* Todo */
 	}
-	
 
 }

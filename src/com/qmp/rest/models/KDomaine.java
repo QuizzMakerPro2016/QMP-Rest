@@ -1,4 +1,4 @@
-package rest.qcm;
+package com.qmp.rest.models;
 
 import net.ko.kobject.KObject;
 import net.ko.persistence.annotation.Entity;
