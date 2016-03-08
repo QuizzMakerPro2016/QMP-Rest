@@ -63,12 +63,55 @@ public class Answer extends RestBase{
 			} catch (SecurityException | IllegalArgumentException
 					| NoSuchFieldException | IllegalAccessException
 					| InvocationTargetException e) {
-				message = e.toString();
+				message = "{\"message\": \" "+e.toString()+" }";
 
 			}
 		}
-
 		KoHttp.getDao(KReponse.class).create(reponse);
+		return message;
+	}
+	
+	@POST
+	@Path("/update")
+	@Consumes("application/x-www-form-urlencoded")
+	public String updateAnswer(MultivaluedMap<String, String> formParams)
+			throws SQLException {
+		int id = Integer.valueOf(formParams.get("id").get(0));
+		KReponse answer = KoHttp.getDao(KReponse.class).readById(id);
+
+		String message = "{\"message\": \"Update OK\"}";
+		for (String param : formParams.keySet()) {
+			try {
+				String value = formParams.get(param) + "";
+				value = value.replaceFirst("^\\[(.*)\\]$", "$1");
+				answer.setAttribute(param, value, false);
+			} catch (SecurityException | IllegalArgumentException
+					| NoSuchFieldException | IllegalAccessException
+					| InvocationTargetException e) {
+				message = "{\"message\": \" "+e.toString()+" }";
+
+			}
+		}
+		KoHttp.getDao(KReponse.class).update(answer);
+		
+		return message;
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/delete/{id}")
+	public String deleteAnswer(@PathParam("id") int id){
+		KReponse answer = KoHttp.getDao(KReponse.class).readById(id);
+		String message = "{\"message\": \"Delete FAILED\"}";
+		if (!answer.isLoaded())
+			return message;
+		try {
+			KoHttp.getDao(KReponse.class).delete(answer);
+		} catch (SQLException e) {
+			message = "{\"message\": \" "+e.getMessage()+"\"}";
+		}
+		message="{\"message\": \"Delete OK\"}";
+		
 		return message;
 	}
 
