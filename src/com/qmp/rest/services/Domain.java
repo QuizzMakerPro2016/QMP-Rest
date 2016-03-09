@@ -12,9 +12,17 @@ import net.ko.kobject.KListObject;
 import com.google.gson.Gson;
 import com.qmp.rest.models.KDomaine;
 
+/**
+ * @author Antoine
+ * Domain REST Functions
+ */
 @Path("/domain")
 public class Domain extends RestBase {
 	
+	/**
+	 * Return all Domains
+	 * @return JSON Domains List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
@@ -22,6 +30,10 @@ public class Domain extends RestBase {
 		return getAll();
 	}
 
+	/**
+	 * Return all Domains
+	 * @return JSON Domains List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -30,6 +42,12 @@ public class Domain extends RestBase {
 		return new Gson().toJson(domains.asAL());
 	}
 	
+	
+	/**
+	 * Get domain by ID
+	 * @param id - Searched Domain's id
+	 * @return JSON Domain with id parameter
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
