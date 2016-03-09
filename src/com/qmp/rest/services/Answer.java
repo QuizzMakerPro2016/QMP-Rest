@@ -112,6 +112,9 @@ public class Answer extends RestBase{
 			throws SQLException {
 		int id = Integer.valueOf(formParams.get("id").get(0));
 		KReponse answer = KoHttp.getDao(KReponse.class).readById(id);
+		
+		if (!answer.isLoaded())
+			return "{\"message\": \"Error while loading Answer with id " + String.valueOf(id) + "\"}";
 
 		String message = "{\"message\": \"Update OK\"}";
 		for (String param : formParams.keySet()) {
