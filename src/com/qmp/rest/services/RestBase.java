@@ -10,7 +10,16 @@ import net.ko.framework.KoHttp;
 import net.ko.kobject.KObject;
 
 public class RestBase {
+	
+	@Context
+	protected ServletContext context;
 
+	@Context
+	public void setServletContext(ServletContext context) {
+		this.context = context;
+		KoHttp.kstart(context);
+	}
+	
 	public String setValuesToKObject(KObject obj, MultivaluedMap<String, String> formParams){
 		String msg = null;
 		
@@ -28,15 +37,5 @@ public class RestBase {
 		}
 		
 		return msg;
-	}
-
-	
-	@Context
-	protected ServletContext context;
-
-	@Context
-	public void setServletContext(ServletContext context) {
-		this.context = context;
-		KoHttp.kstart(context);
 	}
 }

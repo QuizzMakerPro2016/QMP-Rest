@@ -1,6 +1,5 @@
 package com.qmp.rest.services;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
@@ -80,22 +79,15 @@ public class Answer extends RestBase{
 	@Consumes("application/x-www-form-urlencoded")
 	public String addOne(MultivaluedMap<String, String> formParams)
 			throws SQLException {
-		KReponse reponse = new KReponse();
+		KReponse answer = new KReponse();
 
 		String message = "{\"message\": \"Insert OK\"}";
-		for (String param : formParams.keySet()) {
-			try {
-				String value = formParams.get(param) + "";
-				value = value.replaceFirst("^\\[(.*)\\]$", "$1");
-				reponse.setAttribute(param, value, false);
-			} catch (SecurityException | IllegalArgumentException
-					| NoSuchFieldException | IllegalAccessException
-					| InvocationTargetException e) {
-				message = "{\"message\": \" "+e.toString()+" }";
-
-			}
-		}
-		KoHttp.getDao(KReponse.class).create(reponse);
+		
+		String error = setValuesToKObject(answer, formParams);
+		if(error != null)
+			return error;
+		
+		KoHttp.getDao(KReponse.class).create(answer);
 		return message;
 	}
 	
@@ -117,18 +109,10 @@ public class Answer extends RestBase{
 			return "{\"message\": \"Error while loading Answer with id " + String.valueOf(id) + "\"}";
 
 		String message = "{\"message\": \"Update OK\"}";
-		for (String param : formParams.keySet()) {
-			try {
-				String value = formParams.get(param) + "";
-				value = value.replaceFirst("^\\[(.*)\\]$", "$1");
-				answer.setAttribute(param, value, false);
-			} catch (SecurityException | IllegalArgumentException
-					| NoSuchFieldException | IllegalAccessException
-					| InvocationTargetException e) {
-				message = "{\"message\": \" "+e.toString()+" }";
-
-			}
-		}
+		
+		String error = setValuesToKObject(answer, formParams);
+		if(error != null)
+			return error;
 		KoHttp.getDao(KReponse.class).update(answer);
 		
 		return message;
@@ -144,7 +128,7 @@ public class Answer extends RestBase{
 	@Path("/{id}")
 	public String deleteAnswer(@PathParam("id") int id){
 		KReponse answer = KoHttp.getDao(KReponse.class).readById(id);
-		String message = "{\"message\": \"Delete FAILED\"}";
+		String message = "{\"message\": \"Error while loading Answer with id " + String.valueOf(id) + "\"}";
 		if (!answer.isLoaded())
 			return message;
 		try {

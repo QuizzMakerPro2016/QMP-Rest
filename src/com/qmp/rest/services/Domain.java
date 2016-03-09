@@ -1,6 +1,5 @@
 package com.qmp.rest.services;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
@@ -67,6 +66,22 @@ public class Domain extends RestBase {
 	}
 	
 	/**
+	 * Get quizzes about the domain of ID id
+	 * @param id - Quizz ID
+	 * @return JSON Domain List
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/quizzes")
+	public String getQuizzes(@PathParam("id") int id) {
+		KDomaine domain = KoHttp.getDao(KDomaine.class).readById(id);
+		if (!domain.isLoaded())
+			return "null";
+		
+		return new Gson().toJson(domain.getQuestionnaires().asAL());
+	}
+	
+	/**
 	 * Add a domain in DB using form passed in POST Request
 	 * @param formParams POST form with domain data
 	 * @return Error or Success Message
@@ -80,18 +95,11 @@ public class Domain extends RestBase {
 		KDomaine domain = new KDomaine();
 
 		String message = "{\"message\": \"Insert OK\"}";
-		for (String param : formParams.keySet()) {
-			try {
-				String value = formParams.get(param) + "";
-				value = value.replaceFirst("^\\[(.*)\\]$", "$1");
-				domain.setAttribute(param, value, false);
-			} catch (SecurityException | IllegalArgumentException
-					| NoSuchFieldException | IllegalAccessException
-					| InvocationTargetException e) {
-				message = "{\"message\": \" "+e.toString()+" }";
-
-			}
-		}
+		
+		String error = setValuesToKObject(domain, formParams);
+		if(error != null)
+			return error;
+		
 		KoHttp.getDao(KDomaine.class).create(domain);
 		return message;
 	}
@@ -114,18 +122,11 @@ public class Domain extends RestBase {
 			return "{\"message\": \"Error while loading Domain with id " + String.valueOf(id) + "\"}";
 
 		String message = "{\"message\": \"Update OK\"}";
-		for (String param : formParams.keySet()) {
-			try {
-				String value = formParams.get(param) + "";
-				value = value.replaceFirst("^\\[(.*)\\]$", "$1");
-				domain.setAttribute(param, value, false);
-			} catch (SecurityException | IllegalArgumentException
-					| NoSuchFieldException | IllegalAccessException
-					| InvocationTargetException e) {
-				message = "{\"message\": \" "+e.toString()+" }";
-
-			}
-		}
+		
+		String error = setValuesToKObject(domain, formParams);
+		if(error != null)
+			return error;
+		
 		KoHttp.getDao(KDomaine.class).update(domain);
 		
 		return message;
