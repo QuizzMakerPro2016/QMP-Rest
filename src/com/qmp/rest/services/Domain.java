@@ -66,6 +66,22 @@ public class Domain extends RestBase {
 	}
 	
 	/**
+	 * Get quizzes about the domain of ID id
+	 * @param id - Quizz ID
+	 * @return JSON Domain List
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/quizzes")
+	public String getQuizzes(@PathParam("id") int id) {
+		KDomaine domain = KoHttp.getDao(KDomaine.class).readById(id);
+		if (!domain.isLoaded())
+			return "null";
+		
+		return new Gson().toJson(domain.getQuestionnaires().asAL());
+	}
+	
+	/**
 	 * Add a domain in DB using form passed in POST Request
 	 * @param formParams POST form with domain data
 	 * @return Error or Success Message

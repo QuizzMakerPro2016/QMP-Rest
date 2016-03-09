@@ -113,7 +113,6 @@ public class Answer extends RestBase{
 		String error = setValuesToKObject(answer, formParams);
 		if(error != null)
 			return error;
-
 		KoHttp.getDao(KReponse.class).update(answer);
 		
 		return message;
