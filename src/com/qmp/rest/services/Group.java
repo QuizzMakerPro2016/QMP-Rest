@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.qmp.rest.models.KGroupe;
 import com.qmp.rest.models.KGroupe_questionnaire;
 import com.qmp.rest.models.KQuestionnaire;
+import com.qmp.rest.models.KReponse;
 
 import net.ko.framework.KoHttp;
 import net.ko.kobject.KListObject;
@@ -78,7 +79,7 @@ public class Group extends RestBase {
 		if(error != null)
 			return error;
 
-		KoHttp.getDao(KGroupe.class).update(group);
+		KoHttp.getDao(KGroupe.class).create(group);
 		
 		return message;
 	}
@@ -104,15 +105,22 @@ public class Group extends RestBase {
 		return message;
 	}
 
-
 	@DELETE
-	@Path("/delete/{id}")
-	public String delete(MultivaluedMap<String, String> formParams, @PathParam("id") int id) {
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public String delete(@PathParam("id") int id){
 		KGroupe group = KoHttp.getDao(KGroupe.class).readById(id);
-		KListObject<KGroupe> groups = KoHttp.getDao(KGroupe.class).readAll();
-		group.deleteFrom(groups);
-
-		return "Deleted";
+		String message = "{\"message\": \"Delete FAILED\"}";
+		if (!group.isLoaded())
+			return message;
+		try {
+			KoHttp.getDao(KGroupe.class).delete(group);
+		} catch (SQLException e) {
+			message = "{\"message\": \" "+e.getMessage()+"\"}";
+		}
+		message="{\"message\": \"Delete OK\"}";
+		
+		return message;
 	}
 
 }
