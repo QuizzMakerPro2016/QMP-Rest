@@ -12,17 +12,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import net.ko.framework.KoHttp;
-import net.ko.framework.KoSession;
-import net.ko.kobject.KListObject;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.qmp.adapters.GroupeAdapter;
-import com.qmp.adapters.UtilisateurAdapter;
+//import com.qmp.adapters.GroupeAdapter;
+//import com.qmp.adapters.UtilisateurAdapter;
 import com.qmp.rest.models.KGroupe;
 import com.qmp.rest.models.KRealisation;
 import com.qmp.rest.models.KUtilisateur;
+
+import net.ko.framework.KoHttp;
+import net.ko.framework.KoSession;
+import net.ko.kobject.KListObject;
 
 @Path("/user")
 public class User extends RestBase {
@@ -77,12 +77,13 @@ public class User extends RestBase {
 	@GET
 	@Path("/{id}/groups")
 	public String groups(@PathParam("id") int id) {
-		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class,id);
+		/*KUtilisateur user = KoSession.kloadOne(KUtilisateur.class,id);
 		GsonBuilder builder=new GsonBuilder();
 		builder.registerTypeAdapter(KGroupe.class, new GroupeAdapter());
 		builder.registerTypeAdapter(KUtilisateur.class, new UtilisateurAdapter());
 		Gson gson=builder.create();
-		return gson.toJson(user.getGroupes().asAL());
+		return gson.toJson(user.getGroupes().asAL());*/
+		return "null";
 	}
 
 	@GET
