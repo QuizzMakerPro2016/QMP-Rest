@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -13,13 +14,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import sun.security.krb5.internal.util.KrbDataOutputStream;
 import net.ko.framework.KoHttp;
 import net.ko.kobject.KListObject;
 
 import com.google.gson.Gson;
 import com.qmp.rest.models.KDomaine;
-import com.qmp.rest.models.KReponse;
 
 /**
  * @author Antoine
@@ -106,7 +105,7 @@ public class Domain extends RestBase {
 	@POST
 	@Path("/update")
 	@Consumes("application/x-www-form-urlencoded")
-	public String updateAnswer(MultivaluedMap<String, String> formParams)
+	public String updateDomain(MultivaluedMap<String, String> formParams)
 			throws SQLException {
 		int id = Integer.valueOf(formParams.get("id").get(0));
 		KDomaine domain = KoHttp.getDao(KDomaine.class).readById(id);
@@ -128,6 +127,31 @@ public class Domain extends RestBase {
 			}
 		}
 		KoHttp.getDao(KDomaine.class).update(domain);
+		
+		return message;
+	}
+	
+	/**
+	 * Delete a Domain entry in DB
+	 * @param id - ID of Domain to delete
+	 * @return Error or Success Message
+	 */
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public String deleteDomain(@PathParam("id") int id){
+		KDomaine domain = KoHttp.getDao(KDomaine.class).readById(id);
+		String message = "{\"message\": \"Error while loading Domain with id " + String.valueOf(id) + " \"}";
+		
+		if (!domain.isLoaded())
+			return message;
+		
+		try {
+			KoHttp.getDao(KDomaine.class).delete(domain);
+		} catch (SQLException e) {
+			message = "{\"message\": \" "+e.getMessage()+"\"}";
+		}
+		message="{\"message\": \"Delete OK\"}";
 		
 		return message;
 	}
