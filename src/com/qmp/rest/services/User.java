@@ -96,14 +96,14 @@ public class User extends RestBase {
 	}
 
 	@POST
-	@Path("/update/{id}")
+	@Path("/{id}")
 	@Consumes("application/x-www-form-urlencoded")
 	public String update(MultivaluedMap<String, String> formParams, @PathParam("id") int id)
 			throws SQLException {
 		KUtilisateur user = KoHttp.getDao(KUtilisateur.class).readById(id);
 		
 		if (!user.isLoaded())
-			return "{\"message\": \"Error while loading group with id " + String.valueOf(id) + "\"}";
+			return "{\"message\": \"Error while loading user with id " + String.valueOf(id) + "\"}";
 
 		String message = "{\"message\": \"Update OK\"}";
 		
@@ -117,16 +117,14 @@ public class User extends RestBase {
 	}
 
 	@PUT
-	@Path("/add")
+	@Path("/")
 	@Consumes("application/x-www-form-urlencoded")
 	public String addGroup(MultivaluedMap<String, String> formParams)
 			throws SQLException {
 		KUtilisateur user = new KUtilisateur();
-		
-		if (!user.isLoaded())
-			return "{\"message\": \"Error while creating group \"}";
+	
 
-		String message = "{\"message\": \"Adding new group OK\"}";
+		String message = "{\"message\": \"Added new user OK\"}";
 		
 		String error = setValuesToKObject(user, formParams);
 		if(error != null)
