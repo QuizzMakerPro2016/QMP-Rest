@@ -1,6 +1,7 @@
 package com.qmp.rest.services;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +14,11 @@ import net.ko.framework.KoHttp;
 import net.ko.kobject.KListObject;
 
 
-
+/**
+ * @author aleboisselier, nBRossault
+ * Quizz REST Functions
+ */
+@Path("/quizz")
 public class Quizz extends RestBase {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -36,5 +41,28 @@ public class Quizz extends RestBase {
 		if (!quizz.isLoaded())
 			return "null";
 		return new Gson().toJson(quizz);
+	}
+	
+	/**
+	 * Add an answer in DB using form passed in POST Request
+	 * @param formParams POST form with answer data
+	 * @return Error or Success Message
+	 * @throws SQLException
+	 */
+	@PUT
+	@Path("/")
+	@Consumes("application/x-www-form-urlencoded")
+	public String addOne(MultivaluedMap<String, String> formParams)
+			throws SQLException {
+		KQuestionnnaire quizzes = new KQuestionnnaire();
+
+		String message = "{\"message\": \"Insert OK\"}";
+		
+		String error = setValuesToKObject(quizzes, formParams);
+		if(error != null)
+			return error;
+		
+		KoHttp.getDao(KQuestionnnaire.class).create(quizzes);
+		return message;
 	}
 }
