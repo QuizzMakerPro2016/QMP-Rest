@@ -37,13 +37,9 @@ public class KUtilisateur extends KObject {
 
 	public KUtilisateur() {
 		super();
-		// hasMany(KGroupe_utilisateur.class);
 		belongsTo(KRang.class);
 		hasAndBelongsToMany(KGroupe_utilisateur.class, KGroupe.class);
 		hasMany(KRealisation.class);
-		// hasAndBelongsToMany("groupes", KGroupe.class,
-		// KUtilisateur_Groupe.class, "id", "groupe", "id", "idUtilisateur",
-		// "idGroupe");
 
 	}
 	/**

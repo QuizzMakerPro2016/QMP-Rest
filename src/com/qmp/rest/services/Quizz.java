@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
 import com.qmp.rest.models.KQuestionnaire;
-import com.qmp.rest.models.KReponse;
 
 import net.ko.framework.KoHttp;
 import net.ko.kobject.KListObject;
