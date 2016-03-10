@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,19 +16,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
+import com.qmp.rest.models.KGroupe;
+import com.qmp.rest.models.KQuestionnaire;
+import com.qmp.rest.models.KUtilisateur;
+
 import net.ko.framework.Ko;
 import net.ko.framework.KoHttp;
 import net.ko.framework.KoSession;
 import net.ko.kobject.KListObject;
 
-import com.qmp.rest.models.KGroupe;
-import com.qmp.rest.models.KQuestionnaire;
-import com.qmp.rest.models.KUtilisateur;
-
 
 @Path("/user")
 public class User extends RestBase {
 
+	/**
+	 * Return all Users (root)
+	 * @return JSON User List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
@@ -36,6 +41,10 @@ public class User extends RestBase {
 		return gson.toJson(users.asAL());
 	}
 	
+	/**
+	 * Return all Users
+	 * @return JSON User List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -44,6 +53,10 @@ public class User extends RestBase {
 		return gson.toJson(users.asAL());
 	}
 
+	/**
+	 * Return an Users
+	 * @return JSON User
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
@@ -54,6 +67,10 @@ public class User extends RestBase {
 		return gson.toJson(user);
 	}
 
+	/**
+	 * Return all quizzes of an Users
+	 * @return JSON quizz List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/quizzes")
@@ -70,6 +87,10 @@ public class User extends RestBase {
 		return result;
 	}
 
+	/**
+	 * Return all quizzes done by an Users
+	 * @return JSON quizz List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/quizzes/done")
@@ -79,14 +100,10 @@ public class User extends RestBase {
 		return result;
 	}
 
-	@GET
-	@Path("/recovery/{mail}")
-	public String recovery() {
-		return null;
-		/* Todo */
-
-	}
-
+	/**
+	 * Return all groups of an user
+	 * @return JSON group List
+	 */
 	@GET
 	@Path("/{id}/groups")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -96,13 +113,30 @@ public class User extends RestBase {
 		return result;
 	}
 
-	@GET
-	@Path("/checkConnected")
-	public String checkConnected() {
-		return null;
-		/* Todo */
+	/**
+	 * Connect an User
+	 * @return String result
+	 */
+	@POST
+	@Path("/connect")
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String connect(@FormParam("login") String login, @FormParam("password") String password) {
+		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, "login='" + login + "'");
+		String result = "{\"connected\":false,\"message\":\"Nom d'utilisateur ou mot de passe incorrect\"}";
+
+		if (user.isLoaded()) {
+			if (user.getPassword().equals(password)) {
+				result = "{\"connected\":true,\"user\":" + gson.toJson(user) + "}";
+			}
+		}
+		return result;
 	}
 
+	/**
+	 * Update an User
+	 * @return String message
+	 */
 	@POST
 	@Path("/{id}")
 	@Consumes("application/x-www-form-urlencoded")
@@ -124,6 +158,10 @@ public class User extends RestBase {
 		return message;
 	}
 
+	/**
+	 * Create an User
+	 * @return String message
+	 */
 	@PUT
 	@Path("/")
 	@Consumes("application/x-www-form-urlencoded")
@@ -143,6 +181,10 @@ public class User extends RestBase {
 		return message;
 	}
 
+	/**
+	 * Delete an user
+	 * @return String message
+	 */
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")

@@ -23,7 +23,10 @@ import net.ko.kobject.KListObject;
 @Path("/group")
 public class Group extends RestBase {
 
-	
+	/**
+	 * Get All Groups (Root)
+	 * @return JSON Group List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
@@ -32,6 +35,10 @@ public class Group extends RestBase {
 		return gson.toJson(groups.asAL());
 	}
 	
+	/**
+	 * Get All Groups
+	 * @return JSON Group List
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -40,6 +47,10 @@ public class Group extends RestBase {
 		return gson.toJson(groups.asAL());
 	}
 
+	/**
+	 * Get a Group
+	 * @return JSON Group
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
@@ -50,6 +61,10 @@ public class Group extends RestBase {
 		return gson.toJson(group);
 	}
 
+	/**
+	 * Get all quizz in a group
+	 * @return JSON quizz List
+	 */
 	@GET
 	@Path("/{id}/quizzes")
 	public String quizzes(@PathParam("id") int id) {
@@ -58,7 +73,10 @@ public class Group extends RestBase {
 			return "null";
 		return gson.toJson(group.getQuestionnaires());
 	}
-
+	/**
+	 * Get all users in a group
+	 * @return JSON user List
+	 */
 	@GET
 	@Path("/{id}/users")
 	public String users(@PathParam("id") int id) {
@@ -68,6 +86,10 @@ public class Group extends RestBase {
 		return gson.toJson(group.getUtilisateurs());
 	}
 	
+	/**
+	 * Create a group
+	 * @return String message
+	 */
 	@PUT
 	@Path("/")
 	@Consumes("application/x-www-form-urlencoded")
@@ -88,7 +110,10 @@ public class Group extends RestBase {
 		
 		return message;
 	}
-	
+	/**
+	 * Update a group
+	 * @return String message
+	 */
 	@POST
 	@Path("/{id}")
 	@Consumes("application/x-www-form-urlencoded")
@@ -110,6 +135,10 @@ public class Group extends RestBase {
 		return message;
 	}
 
+	/**
+	 * Delete a group
+	 * @return String message
+	 */
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
