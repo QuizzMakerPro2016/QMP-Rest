@@ -11,7 +11,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import com.google.gson.Gson;
 import com.qmp.rest.models.KQuestionnaire;
 
 import net.ko.framework.KoHttp;
@@ -24,6 +23,10 @@ import net.ko.kobject.KListObject;
  */
 @Path("/quizz")
 public class Quizz extends RestBase {
+	/**
+	 * Index Function
+	 * @return All Quizzes Object in DB
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
@@ -31,6 +34,10 @@ public class Quizz extends RestBase {
 		return getAll();
 	}
 	
+	/**
+	 * Get all Quizzes Object in DB
+	 * @return All Quizzes Object in DB
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -39,6 +46,11 @@ public class Quizz extends RestBase {
 		return gson.toJson(quizzes.asAL());
 	}
 	
+	/**
+	 * Search a quizz with given ID
+	 * @param id of quizz to get
+	 * @return Quizz JSON Object or NULL
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
@@ -50,8 +62,8 @@ public class Quizz extends RestBase {
 	}
 	
 	/**
-	 * Add an answer in DB using form passed in POST Request
-	 * @param formParams POST form with answer data
+	 * Add a quizz in DB using form passed in POST Request
+	 * @param formParams POST form with quizz data
 	 * @return Error or Success Message
 	 * @throws SQLException
 	 */
