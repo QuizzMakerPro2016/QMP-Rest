@@ -1,10 +1,15 @@
 package com.qmp.rest.services;
 
+import java.sql.SQLException;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.google.gson.Gson;
 import com.qmp.rest.models.KQuestionnaire;
@@ -35,7 +40,7 @@ public class Quizz extends RestBase {
 	}
 	
 	@Path("/{id}")
-	public String getOne(int id){
+	public String getOne(@PathParam("id") int id){
 		KQuestionnaire quizz = KoHttp.getDao(KQuestionnaire.class).readById(id);
 		if (!quizz.isLoaded())
 			return "null";
@@ -53,7 +58,7 @@ public class Quizz extends RestBase {
 	@Consumes("application/x-www-form-urlencoded")
 	public String addOne(MultivaluedMap<String, String> formParams)
 			throws SQLException {
-		KQuestionnnaire quizzes = new KQuestionnnaire();
+		KQuestionnaire quizzes = new KQuestionnaire();
 
 		String message = "{\"message\": \"Insert OK\"}";
 		
@@ -61,7 +66,7 @@ public class Quizz extends RestBase {
 		if(error != null)
 			return error;
 		
-		KoHttp.getDao(KQuestionnnaire.class).create(quizzes);
+		KoHttp.getDao(KQuestionnaire.class).create(quizzes);
 		return message;
 	}
 }
