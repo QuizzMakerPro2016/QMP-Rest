@@ -41,7 +41,7 @@ public class Quizz extends RestBase {
 	@Path("/all")
 	public String getAll() {
 		KListObject<KQuestionnaire> quizzes = KoHttp.getDao(KQuestionnaire.class).readAll();
-		return new Gson().toJson(quizzes.asAL());
+		return gson.toJson(quizzes.asAL());
 	}
 	
 

@@ -1,6 +1,5 @@
 package com.qmp.rest.services;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,11 +14,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import com.google.gson.Gson;
 import com.qmp.rest.models.KGroupe;
 import com.qmp.rest.models.KGroupe_questionnaire;
 import com.qmp.rest.models.KQuestionnaire;
-import com.qmp.rest.models.KReponse;
 
 import net.ko.framework.KoHttp;
 import net.ko.kobject.KListObject;
@@ -32,7 +29,7 @@ public class Group extends RestBase {
 	@Path("/all")
 	public String all() {
 		KListObject<KGroupe> groups = KoHttp.getDao(KGroupe.class).readAll();
-		return new Gson().toJson(groups.asAL());
+		return gson.toJson(groups.asAL());
 	}
 
 	@GET
@@ -42,7 +39,7 @@ public class Group extends RestBase {
 		KGroupe group = KoHttp.getDao(KGroupe.class).readById(id);
 		if (!group.isLoaded())
 			return "null";
-		return new Gson().toJson(group);
+		return gson.toJson(group);
 	}
 
 	@GET
@@ -54,7 +51,7 @@ public class Group extends RestBase {
 		for(KGroupe_questionnaire q:quiz.asAL()){
 			quizs.add(q.getQuestionnaire());
 		}
-		return new Gson().toJson(quizs);
+		return gson.toJson(quizs);
 	}
 
 	@GET
