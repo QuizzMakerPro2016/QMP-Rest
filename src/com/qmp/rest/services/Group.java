@@ -13,14 +13,25 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import net.ko.framework.KoHttp;
-import net.ko.kobject.KListObject;
-
 import com.qmp.rest.models.KGroupe;
+import com.qmp.rest.models.KQuestionnaire;
+
+import net.ko.framework.KoHttp;
+import net.ko.framework.KoSession;
+import net.ko.kobject.KListObject;
 
 @Path("/group")
 public class Group extends RestBase {
 
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/")
+	public String root() {
+		KListObject<KGroupe> groups = KoHttp.getDao(KGroupe.class).readAll();
+		return gson.toJson(groups.asAL());
+	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -42,17 +53,23 @@ public class Group extends RestBase {
 	@GET
 	@Path("/{id}/quizzes")
 	public String quizzes(@PathParam("id") int id) {
-		return "";
+		KGroupe group = KoSession.kloadOne(KGroupe.class, id);
+		if (!group.isLoaded())
+			return "null";
+		return gson.toJson(group.getQuestionnaires());
 	}
 
 	@GET
 	@Path("/{id}/users")
-	public String users() {
-		return null;
+	public String users(@PathParam("id") int id) {
+		KGroupe group = KoSession.kloadOne(KGroupe.class, id);
+		if (!group.isLoaded())
+			return "null";
+		return gson.toJson(group.getUtilisateurs());
 	}
 	
 	@PUT
-	@Path("/add")
+	@Path("/")
 	@Consumes("application/x-www-form-urlencoded")
 	public String addGroup(MultivaluedMap<String, String> formParams)
 			throws SQLException {
@@ -73,7 +90,7 @@ public class Group extends RestBase {
 	}
 	
 	@POST
-	@Path("/update/{id}")
+	@Path("/{id}")
 	@Consumes("application/x-www-form-urlencoded")
 	public String update(MultivaluedMap<String, String> formParams, @PathParam("id") int id)
 			throws SQLException {

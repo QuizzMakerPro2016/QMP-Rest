@@ -30,6 +30,14 @@ public class User extends RestBase {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/")
+	public String root() {
+		KListObject<KUtilisateur> users = KoHttp.getDao(KUtilisateur.class).readAll();
+		return gson.toJson(users.asAL());
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public String all() {
 		KListObject<KUtilisateur> users = KoHttp.getDao(KUtilisateur.class).readAll();
