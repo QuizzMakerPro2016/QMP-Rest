@@ -2,103 +2,87 @@ package com.qmp.rest.models;
 
 import net.ko.kobject.KObject;
 import net.ko.persistence.annotation.Entity;
-import net.ko.persistence.annotation.Id;
 import net.ko.persistence.annotation.Table;
+import net.ko.persistence.annotation.Id;
+
 
 /**
- * Classe KReponse_utilisateur
- */
+* Classe KReponse_utilisateur
+*/
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "reponse_utilisateur")
+@Table(name="reponse_utilisateur")
 public class KReponse_utilisateur extends KObject {
 	@Id
-	private int realisation_id;
+	private int idRealisation;
 	@Id
-	private int reponse_id;
+	private int idReponse;
 	private KRealisation realisation;
 	private KReponse reponse;
 
 	public KReponse_utilisateur() {
 		super();
-		// belongsTo(KReponse.class);belongsTo(KRealisation.class);
+		//belongsTo(KReponse.class);belongsTo(KRealisation.class);
 	}
-
 	/**
-	 * return the value of realisation_id
-	 * 
-	 * @return realisation_id
+	 * return the value of idRealisation
+	 * @return idRealisation
 	 */
-	public int getRealisation_id() {
-		return this.realisation_id;
+	public int getIdRealisation(){
+		return this.idRealisation;
 	}
-
 	/**
-	 * return the value of reponse_id
-	 * 
-	 * @return reponse_id
+	 * return the value of idReponse
+	 * @return idReponse
 	 */
-	public int getReponse_id() {
-		return this.reponse_id;
+	public int getIdReponse(){
+		return this.idReponse;
 	}
-
 	/**
 	 * return the value of realisation
-	 * 
 	 * @return realisation
 	 */
-	public KRealisation getRealisation() {
+	public KRealisation getRealisation(){
 		return this.realisation;
 	}
-
 	/**
 	 * return the value of reponse
-	 * 
 	 * @return reponse
 	 */
-	public KReponse getReponse() {
+	public KReponse getReponse(){
 		return this.reponse;
 	}
 
 	/**
-	 * set the value of realisation_id
-	 * 
-	 * @param aRealisation_id
+	 * set the value of idRealisation
+	 * @param aIdRealisation
 	 */
-	public void setRealisation_id(int aRealisation_id) {
-		this.realisation_id = aRealisation_id;
+	public void setIdRealisation(int aIdRealisation){
+		this.idRealisation=aIdRealisation;
 	}
-
 	/**
-	 * set the value of reponse_id
-	 * 
-	 * @param aReponse_id
+	 * set the value of idReponse
+	 * @param aIdReponse
 	 */
-	public void setReponse_id(int aReponse_id) {
-		this.reponse_id = aReponse_id;
+	public void setIdReponse(int aIdReponse){
+		this.idReponse=aIdReponse;
 	}
-
 	/**
 	 * set the value of realisation
-	 * 
 	 * @param aRealisation
 	 */
-	public void setRealisation(KRealisation aRealisation) {
-		this.realisation = aRealisation;
+	public void setRealisation(KRealisation aRealisation){
+		this.realisation=aRealisation;
 	}
-
 	/**
 	 * set the value of reponse
-	 * 
 	 * @param aReponse
 	 */
-	public void setReponse(KReponse aReponse) {
-		this.reponse = aReponse;
+	public void setReponse(KReponse aReponse){
+		this.reponse=aReponse;
 	}
-
 	@Override
 	public String toString() {
-		return " [realisation_id] = " + realisation_id + " [reponse_id] = "
-				+ reponse_id;
+		return " [idRealisation] = " + idRealisation+" [idReponse] = " + idReponse;
 	}
 }

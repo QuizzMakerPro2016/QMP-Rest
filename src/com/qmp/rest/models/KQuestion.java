@@ -3,6 +3,7 @@ package com.qmp.rest.models;
 import net.ko.kobject.KObject;
 import net.ko.persistence.annotation.Entity;
 import net.ko.persistence.annotation.Table;
+import net.ko.kobject.KListObject;
 
 
 /**
@@ -12,13 +13,22 @@ import net.ko.persistence.annotation.Table;
 @Entity
 @Table(name="question")
 public class KQuestion extends KObject {
+	private int idQuestionnaire;
 	private String libelle;
-	private boolean open;
-	private int questionnaire_id;
+	private boolean type;
+	private KListObject<KReponse> reponses;
+	private KQuestionnaire questionnaire;
 
 	public KQuestion() {
 		super();
-		//
+		//belongsTo(KQuestionnaire.class);hasMany(KReponse.class);
+	}
+	/**
+	 * return the value of idQuestionnaire
+	 * @return idQuestionnaire
+	 */
+	public int getIdQuestionnaire(){
+		return this.idQuestionnaire;
 	}
 	/**
 	 * return the value of libelle
@@ -28,20 +38,34 @@ public class KQuestion extends KObject {
 		return this.libelle;
 	}
 	/**
-	 * return the value of open
-	 * @return open
+	 * return the value of type
+	 * @return type
 	 */
-	public boolean isOpen(){
-		return this.open;
+	public boolean isType(){
+		return this.type;
 	}
 	/**
-	 * return the value of questionnaire_id
-	 * @return questionnaire_id
+	 * return the value of reponses
+	 * @return reponses
 	 */
-	public int getQuestionnaire_id(){
-		return this.questionnaire_id;
+	public KListObject<KReponse> getReponses(){
+		return this.reponses;
+	}
+	/**
+	 * return the value of questionnaire
+	 * @return questionnaire
+	 */
+	public KQuestionnaire getQuestionnaire(){
+		return this.questionnaire;
 	}
 
+	/**
+	 * set the value of idQuestionnaire
+	 * @param aIdQuestionnaire
+	 */
+	public void setIdQuestionnaire(int aIdQuestionnaire){
+		this.idQuestionnaire=aIdQuestionnaire;
+	}
 	/**
 	 * set the value of libelle
 	 * @param aLibelle
@@ -50,21 +74,28 @@ public class KQuestion extends KObject {
 		this.libelle=aLibelle;
 	}
 	/**
-	 * set the value of open
-	 * @param aOpen
+	 * set the value of type
+	 * @param aType
 	 */
-	public void setOpen(boolean aOpen){
-		this.open=aOpen;
+	public void setType(boolean aType){
+		this.type=aType;
 	}
 	/**
-	 * set the value of questionnaire_id
-	 * @param aQuestionnaire_id
+	 * set the value of reponses
+	 * @param aReponses
 	 */
-	public void setQuestionnaire_id(int aQuestionnaire_id){
-		this.questionnaire_id=aQuestionnaire_id;
+	public void setReponses(KListObject<KReponse> aReponses){
+		this.reponses=aReponses;
+	}
+	/**
+	 * set the value of questionnaire
+	 * @param aQuestionnaire
+	 */
+	public void setQuestionnaire(KQuestionnaire aQuestionnaire){
+		this.questionnaire=aQuestionnaire;
 	}
 	@Override
 	public String toString() {
-		return " [questionnaire_id] = " + questionnaire_id+" [libelle] = " + libelle+" [open] = " + open;
+		return " [libelle] = " + libelle+" [idQuestionnaire] = " + idQuestionnaire+" [type] = " + type;
 	}
 }

@@ -18,7 +18,7 @@ public class KDomaine extends KObject {
 
 	public KDomaine() {
 		super();
-		//hasMany(KQuestionnaire.class);
+		hasMany(KQuestionnaire.class);
 	}
 	/**
 	 * return the value of libelle
