@@ -1,5 +1,7 @@
 package com.qmp.rest.models;
 
+import com.google.gson.annotations.Expose;
+
 import net.ko.kobject.KObject;
 import net.ko.persistence.annotation.Entity;
 import net.ko.persistence.annotation.Table;
@@ -14,11 +16,17 @@ import net.ko.kobject.KListObject;
 @Table(name="utilisateur")
 public class KUtilisateur extends KObject {
 	private int idRang;
+	@Expose
 	private String mail;
+	@Expose
 	private String nom;
+	@Expose
 	private String password;
+	@Expose
 	private String prenom;
+	@Expose
 	private KRang rang;
+	@Expose
 	private KListObject<KGroupe> groupes;
 	
 	public KListObject<KGroupe> getGroupes() {
