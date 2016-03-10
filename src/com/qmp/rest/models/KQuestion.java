@@ -1,5 +1,7 @@
 package com.qmp.rest.models;
 
+import com.google.gson.annotations.Expose;
+
 import net.ko.kobject.KObject;
 import net.ko.persistence.annotation.Entity;
 import net.ko.persistence.annotation.Table;
@@ -13,10 +15,16 @@ import net.ko.kobject.KListObject;
 @Entity
 @Table(name="question")
 public class KQuestion extends KObject {
+	
 	private int idQuestionnaire;
+	
+	@Expose
 	private String libelle;
+	@Expose
 	private boolean type;
+	@Expose
 	private KListObject<KReponse> reponses;
+	@Expose
 	private KQuestionnaire questionnaire;
 
 	public KQuestion() {

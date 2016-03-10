@@ -1,5 +1,7 @@
 package com.qmp.rest.models;
 
+import com.google.gson.annotations.Expose;
+
 import net.ko.kobject.KObject;
 import net.ko.persistence.annotation.Entity;
 import net.ko.persistence.annotation.Table;
@@ -17,7 +19,9 @@ public class KReponse_utilisateur extends KObject {
 	private int idRealisation;
 	@Id
 	private int idReponse;
+	@Expose
 	private KRealisation realisation;
+	@Expose
 	private KReponse reponse;
 
 	public KReponse_utilisateur() {
