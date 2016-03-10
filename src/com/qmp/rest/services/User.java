@@ -15,17 +15,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-//import com.qmp.adapters.GroupeAdapter;
-//import com.qmp.adapters.UtilisateurAdapter;
-import com.qmp.rest.models.KGroupe;
-import com.qmp.rest.models.KRealisation;
-import com.qmp.rest.models.KUtilisateur;
-
+import net.ko.framework.Ko;
 import net.ko.framework.KoHttp;
 import net.ko.framework.KoSession;
 import net.ko.kobject.KListObject;
+
+//import com.qmp.adapters.GroupeAdapter;
+//import com.qmp.adapters.UtilisateurAdapter;
+import com.qmp.rest.models.KGroupe;
+import com.qmp.rest.models.KQuestionnaire;
+import com.qmp.rest.models.KUtilisateur;
 
 @Path("/user")
 public class User extends RestBase {
@@ -35,7 +34,7 @@ public class User extends RestBase {
 	@Path("/all")
 	public String all() {
 		KListObject<KUtilisateur> users = KoHttp.getDao(KUtilisateur.class).readAll();
-		return new Gson().toJson(users.asAL());
+		return gson.toJson(users.asAL());
 	}
 
 	@GET
@@ -45,28 +44,32 @@ public class User extends RestBase {
 		KUtilisateur user = KoHttp.getDao(KUtilisateur.class).readById(id);
 		if (!user.isLoaded())
 			return "null";
-		return new Gson().toJson(user);
+		return gson.toJson(user);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/quizzes")
 	public String quizzes(@PathParam("id") int id) {
-		/*
-		KUtilisateur user = KoHttp.getDao(KUtilisateur.class).readById(id);
-		KListObject<KGroupe_utilisateur> groups = user.getGroupe_utilisateurs();
-		
-		return new Gson().toJson(); */
-		return null;
+		Ko.setTempConstraintDeph(2);
+		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, id);
+		KListObject<KQuestionnaire> quizes = new KListObject<KQuestionnaire>(KQuestionnaire.class);
+		KListObject<KGroupe> groupes = user.getGroupes();
+		for (KGroupe gr : groupes) {
+			quizes.addAll(gr.getQuestionnaires());
+		}
+		String result = gson.toJson(quizes.asAL());
+		Ko.restoreConstraintDeph();
+		return result;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/quizzes/done")
 	public String quizzesDone(@PathParam("id") int id) {
-		KUtilisateur user = KoHttp.getDao(KUtilisateur.class).readById(id);
-		KListObject<KRealisation> quizzes = user.getRealisations();
-		return new Gson().toJson(quizzes.asAL());
+		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, id);
+		String result = gson.toJson(user.getRealisations().asAL());
+		return result;
 	}
 
 	@GET
@@ -79,14 +82,11 @@ public class User extends RestBase {
 
 	@GET
 	@Path("/{id}/groups")
-	public String groups(@PathParam("id") int id) {
-		/*KUtilisateur user = KoSession.kloadOne(KUtilisateur.class,id);
-		GsonBuilder builder=new GsonBuilder();
-		builder.registerTypeAdapter(KGroupe.class, new GroupeAdapter());
-		builder.registerTypeAdapter(KUtilisateur.class, new UtilisateurAdapter());
-		Gson gson=builder.create();
-		return gson.toJson(user.getGroupes().asAL());*/
-		return "null";
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getGroups(@PathParam("id") int id) {
+		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, id);
+		String result = gson.toJson(user.getGroupes().asAL());
+		return result;
 	}
 
 	@GET

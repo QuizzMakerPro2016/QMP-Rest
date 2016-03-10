@@ -26,23 +26,24 @@ public class KUtilisateur extends KObject {
 	private String prenom;
 	@Expose
 	private KRang rang;
+	
 	@Expose
 	private KListObject<KGroupe> groupes;
-	
-	public KListObject<KGroupe> getGroupes() {
-		return groupes;
-	}
-	public void setGroupes(KListObject<KGroupe> groupes) {
-		this.groupes = groupes;
-	}
+
+	@Expose
 	private KListObject<KRealisation> realisations;
+
+	
 
 	public KUtilisateur() {
 		super();
-		groupes=new KListObject<KGroupe>(KGroupe.class);
-		hasMany(KRealisation.class);belongsTo(KRang.class);
-		//hasManyBelongsTo(KGroupe_utilisateur.class, KGroupe.class);
-		//hasManyBelongsTo("groupes", KGroupe.class, "id", "groupe_utilisateur", "idUtilisateur", KGroupe_utilisateur.class, "idGroupe");
+		// hasMany(KGroupe_utilisateur.class);
+		belongsTo(KRang.class);
+		hasAndBelongsToMany(KGroupe_utilisateur.class, KGroupe.class);
+		hasMany(KRealisation.class);
+		// hasAndBelongsToMany("groupes", KGroupe.class,
+		// KUtilisateur_Groupe.class, "id", "groupe", "id", "idUtilisateur",
+		// "idGroupe");
 
 	}
 	/**
@@ -149,5 +150,13 @@ public class KUtilisateur extends KObject {
 	@Override
 	public String toString() {
 		return " [password] = " + password+" [mail] = " + mail+" [idRang] = " + idRang+" [nom] = " + nom+" [prenom] = " + prenom;
+	}
+	
+	public KListObject<KGroupe> getGroupes() {
+		return groupes;
+	}
+
+	public void setGroupes(KListObject<KGroupe> groupes) {
+		this.groupes = groupes;
 	}
 }

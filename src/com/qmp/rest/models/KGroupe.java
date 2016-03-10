@@ -1,11 +1,11 @@
 package com.qmp.rest.models;
 
-import com.google.gson.annotations.Expose;
-
+import net.ko.kobject.KListObject;
 import net.ko.kobject.KObject;
 import net.ko.persistence.annotation.Entity;
 import net.ko.persistence.annotation.Table;
-import net.ko.kobject.KListObject;
+
+import com.google.gson.annotations.Expose;
 
 
 /**
@@ -20,13 +20,15 @@ public class KGroupe extends KObject {
 	@Expose
 	private String libelle;
 	@Expose
-	private KListObject<KGroupe_questionnaire> groupe_questionnaires;
+	private KListObject<KQuestionnaire> questionnaires;
 	@Expose
-	private KListObject<KGroupe_utilisateur> groupe_utilisateurs;
+	private KListObject<KUtilisateur> utilisateurs;
+
 
 	public KGroupe() {
 		super();
-		//hasMany(KGroupe_utilisateur.class);hasMany(KGroupe_questionnaire.class);
+		hasAndBelongsToMany(KGroupe_questionnaire.class, KQuestionnaire.class);
+		hasAndBelongsToMany(KGroupe_utilisateur.class, KUtilisateur.class);
 	}
 	/**
 	 * return the value of code
@@ -42,20 +44,7 @@ public class KGroupe extends KObject {
 	public String getLibelle(){
 		return this.libelle;
 	}
-	/**
-	 * return the value of groupe_questionnaires
-	 * @return groupe_questionnaires
-	 */
-	public KListObject<KGroupe_questionnaire> getGroupe_questionnaires(){
-		return this.groupe_questionnaires;
-	}
-	/**
-	 * return the value of groupe_utilisateurs
-	 * @return groupe_utilisateurs
-	 */
-	public KListObject<KGroupe_utilisateur> getGroupe_utilisateurs(){
-		return this.groupe_utilisateurs;
-	}
+
 
 	/**
 	 * set the value of code
@@ -71,20 +60,23 @@ public class KGroupe extends KObject {
 	public void setLibelle(String aLibelle){
 		this.libelle=aLibelle;
 	}
-	/**
-	 * set the value of groupe_questionnaires
-	 * @param aGroupe_questionnaires
-	 */
-	public void setGroupe_questionnaires(KListObject<KGroupe_questionnaire> aGroupe_questionnaires){
-		this.groupe_questionnaires=aGroupe_questionnaires;
+	
+	public KListObject<KQuestionnaire> getQuestionnaires() {
+		return questionnaires;
 	}
-	/**
-	 * set the value of groupe_utilisateurs
-	 * @param aGroupe_utilisateurs
-	 */
-	public void setGroupe_utilisateurs(KListObject<KGroupe_utilisateur> aGroupe_utilisateurs){
-		this.groupe_utilisateurs=aGroupe_utilisateurs;
+
+	public void setQuestionnaires(KListObject<KQuestionnaire> questionnaires) {
+		this.questionnaires = questionnaires;
 	}
+
+	public KListObject<KUtilisateur> getUtilisateurs() {
+		return utilisateurs;
+	}
+
+	public void setUtilisateurs(KListObject<KUtilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
+	}
+	
 	@Override
 	public String toString() {
 		return " [code] = " + code+" [libelle] = " + libelle;

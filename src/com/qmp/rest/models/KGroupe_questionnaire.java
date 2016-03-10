@@ -29,7 +29,7 @@ public class KGroupe_questionnaire extends KObject {
 
 	public KGroupe_questionnaire() {
 		super();
-		//belongsTo(KQuestionnaire.class);belongsTo(KGroupe.class);
+		belongsTo(KQuestionnaire.class);belongsTo(KGroupe.class);
 	}
 	/**
 	 * return the value of idGroupe

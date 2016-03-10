@@ -48,13 +48,8 @@ public class Group extends RestBase {
 	@GET
 	@Path("/{id}/quizzes")
 	public String quizzes(@PathParam("id") int id) {
-		KGroupe group = KoHttp.getDao(KGroupe.class).readById(id);
-		KListObject<KGroupe_questionnaire> quiz = group.getGroupe_questionnaires();
-		ArrayList<KQuestionnaire> quizs = new ArrayList();
-		for(KGroupe_questionnaire q:quiz.asAL()){
-			quizs.add(q.getQuestionnaire());
-		}
-		return new Gson().toJson(quizs);
+		/* */
+		return null;
 	}
 
 	@GET
