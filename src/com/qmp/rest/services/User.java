@@ -20,11 +20,10 @@ import net.ko.framework.KoHttp;
 import net.ko.framework.KoSession;
 import net.ko.kobject.KListObject;
 
-//import com.qmp.adapters.GroupeAdapter;
-//import com.qmp.adapters.UtilisateurAdapter;
 import com.qmp.rest.models.KGroupe;
 import com.qmp.rest.models.KQuestionnaire;
 import com.qmp.rest.models.KUtilisateur;
+
 
 @Path("/user")
 public class User extends RestBase {

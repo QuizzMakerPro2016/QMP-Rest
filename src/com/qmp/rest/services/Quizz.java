@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.qmp.rest.services;
 
 import javax.ws.rs.GET;
@@ -8,41 +5,36 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
+import com.qmp.rest.models.KQuestionnaire;
+import com.qmp.rest.models.KReponse;
+
 import net.ko.framework.KoHttp;
 import net.ko.kobject.KListObject;
 
-import com.google.gson.Gson;
-import com.qmp.rest.models.KQuestionnaire;
 
-/**
- * @author aleboisselier
- *
- */
-@Path("/quizz")
+
 public class Quizz extends RestBase {
-	
-	/**
-	 * Return all Quizzes
-	 * @return JSON Quizzes List
-	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
-	public String index() {
+	public String all() {
 		return getAll();
 	}
-
-	/**
-	 * Return all Quizzes
-	 * @return JSON Quizzes List
-	 */
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public String getAll() {
 		KListObject<KQuestionnaire> quizzes = KoHttp.getDao(KQuestionnaire.class).readAll();
-		return new Gson().toJson(quizzes.asAL());
+		return gson.toJson(quizzes.asAL());
 	}
 	
-
+	@Path("/{id}")
+	public String getOne(int id){
+		KQuestionnaire quizz = KoHttp.getDao(KQuestionnaire.class).readById(id);
+		if (!quizz.isLoaded())
+			return "null";
+		return new Gson().toJson(quizz);
+	}
 }

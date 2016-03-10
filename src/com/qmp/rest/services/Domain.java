@@ -46,7 +46,7 @@ public class Domain extends RestBase {
 	@Path("/all")
 	public String getAll() {
 		KListObject<KDomaine> domains = KoHttp.getDao(KDomaine.class).readAll();
-		return new Gson().toJson(domains.asAL());
+		return gson.toJson(domains.asAL());
 	}
 	
 	
@@ -62,7 +62,7 @@ public class Domain extends RestBase {
 		KDomaine domain = KoHttp.getDao(KDomaine.class).readById(id);
 		if (!domain.isLoaded())
 			return "null";
-		return new Gson().toJson(domain);
+		return gson.toJson(domain);
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class Domain extends RestBase {
 		if (!domain.isLoaded())
 			return "null";
 		
-		return new Gson().toJson(domain.getQuestionnaires().asAL());
+		return gson.toJson(domain.getQuestionnaires().asAL());
 	}
 	
 	/**
