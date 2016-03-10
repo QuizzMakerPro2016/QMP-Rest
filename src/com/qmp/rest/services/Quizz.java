@@ -39,12 +39,14 @@ public class Quizz extends RestBase {
 		return gson.toJson(quizzes.asAL());
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public String getOne(@PathParam("id") int id){
 		KQuestionnaire quizz = KoHttp.getDao(KQuestionnaire.class).readById(id);
 		if (!quizz.isLoaded())
 			return "null";
-		return new Gson().toJson(quizz);
+		return gson.toJson(quizz);
 	}
 	
 	/**
