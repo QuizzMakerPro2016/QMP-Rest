@@ -28,10 +28,16 @@ public class KQuestionnaire extends KObject {
 	private KListObject<KQuestion> questions;
 	@Expose
 	private KListObject<KRealisation> realisations;
+	@Expose
+	private int idUtilisateur;
+	@Expose
+	private KUtilisateur utilisateur;
 
 	public KQuestionnaire() {
 		super();
-		//hasMany(KRealisation.class);hasMany(KQuestion.class);hasMany(KGroupe_questionnaire.class);belongsTo(KDomaine.class);
+		hasMany(KRealisation.class);hasMany(KGroupe_questionnaire.class);belongsTo(KDomaine.class);
+		hasAndBelongsToMany(KQuestion_questionnaire.class, KQuestion.class);
+		belongsTo(KUtilisateur.class);
 	}
 	/**
 	 * return the value of date
@@ -131,6 +137,32 @@ public class KQuestionnaire extends KObject {
 	 */
 	public void setRealisations(KListObject<KRealisation> aRealisations){
 		this.realisations=aRealisations;
+	}
+	
+	
+	/**
+	 * @return the createdBy
+	 */
+	public int getIdUtilisateur() {
+		return idUtilisateur;
+	}
+	/**
+	 * @param createdBy the createdBy to set
+	 */
+	public void setIdUtilisateur(int createdBy) {
+		this.idUtilisateur = createdBy;
+	}
+	/**
+	 * @return the utilisateur
+	 */
+	public KUtilisateur getUtilisateur() {
+		return utilisateur;
+	}
+	/**
+	 * @param utilisateur the utilisateur to set
+	 */
+	public void setUtilisateur(KUtilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 	@Override
 	public String toString() {

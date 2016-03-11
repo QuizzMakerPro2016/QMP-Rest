@@ -33,11 +33,18 @@ public class KUtilisateur extends KObject {
 	@Expose
 	private KListObject<KRealisation> realisations;
 
+	@Expose 
+	private KListObject<KQuestion> questions;
 	
+	@Expose 
+	private KListObject<KQuestion> questionnaires;
 
 	public KUtilisateur() {
 		super();
 		belongsTo(KRang.class);
+		hasAndBelongsToMany(KGroupe_utilisateur.class, KGroupe.class);
+		hasMany(KQuestion.class);
+		hasMany(KQuestionnaire.class);
 		hasAndBelongsToMany(KGroupe_utilisateur.class, KGroupe.class);
 		hasMany(KRealisation.class);
 
@@ -142,6 +149,32 @@ public class KUtilisateur extends KObject {
 	 */
 	public void setRealisations(KListObject<KRealisation> aRealisations){
 		this.realisations=aRealisations;
+	}
+	
+	
+	/**
+	 * @return the questions
+	 */
+	public KListObject<KQuestion> getQuestions() {
+		return questions;
+	}
+	/**
+	 * @param questions the questions to set
+	 */
+	public void setQuestions(KListObject<KQuestion> questions) {
+		this.questions = questions;
+	}
+	/**
+	 * @return the questionnaires
+	 */
+	public KListObject<KQuestion> getQuestionnaires() {
+		return questionnaires;
+	}
+	/**
+	 * @param questionnaires the questionnaires to set
+	 */
+	public void setQuestionnaires(KListObject<KQuestion> questionnaires) {
+		this.questionnaires = questionnaires;
 	}
 	@Override
 	public String toString() {

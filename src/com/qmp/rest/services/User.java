@@ -54,7 +54,7 @@ public class User extends RestBase {
 	}
 
 	/**
-	 * Return an Users
+	 * Return a Users
 	 * @return JSON User
 	 */
 	@GET
@@ -66,9 +66,11 @@ public class User extends RestBase {
 			return "null";
 		return gson.toJson(user);
 	}
+	
+	
 
 	/**
-	 * Return all quizzes of an Users
+	 * Return all quizzes which can be answered by a user
 	 * @return JSON quizz List
 	 */
 	@GET
@@ -88,7 +90,7 @@ public class User extends RestBase {
 	}
 
 	/**
-	 * Return all quizzes done by an Users
+	 * Return all quizzes done by a Users
 	 * @return JSON quizz List
 	 */
 	@GET
@@ -101,7 +103,7 @@ public class User extends RestBase {
 	}
 
 	/**
-	 * Return all groups of an user
+	 * Return all groups of a user
 	 * @return JSON group List
 	 */
 	@GET
@@ -112,9 +114,35 @@ public class User extends RestBase {
 		String result = gson.toJson(user.getGroupes().asAL());
 		return result;
 	}
+	
+	/**
+	 * Return all quizz made by a user
+	 * @return JSON quizz List
+	 */
+	@GET
+	@Path("/{id}/quizzes/made")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String quizzMade(@PathParam("id") int id) {
+		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, id);
+		String result = gson.toJson(user.getQuestionnaires());
+		return result;
+	}
+	
+	/**
+	 * Return all questions made by a user
+	 * @return JSON question List
+	 */
+	@GET
+	@Path("/{id}/questions/made")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String questionMade(@PathParam("id") int id) {
+		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, id);
+		String result = gson.toJson(user.getQuestions());
+		return result;
+	}
 
 	/**
-	 * Connect an User
+	 * Connect a User
 	 * @return String result
 	 */
 	@POST
@@ -134,7 +162,7 @@ public class User extends RestBase {
 	}
 
 	/**
-	 * Update an User
+	 * Update a User
 	 * @return String message
 	 */
 	@POST
@@ -159,7 +187,7 @@ public class User extends RestBase {
 	}
 
 	/**
-	 * Create an User
+	 * Create a User
 	 * @return String message
 	 */
 	@PUT
@@ -182,7 +210,7 @@ public class User extends RestBase {
 	}
 
 	/**
-	 * Delete an user
+	 * Delete a user
 	 * @return String message
 	 */
 	@DELETE

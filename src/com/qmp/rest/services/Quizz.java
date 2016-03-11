@@ -61,6 +61,17 @@ public class Quizz extends RestBase {
 		return gson.toJson(quizz);
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/user")
+	public String getzazaz(@PathParam("id") int id){
+		KQuestionnaire quizz = KoHttp.getDao(KQuestionnaire.class).readById(id);
+		
+		if (!quizz.isLoaded())
+			return "null";
+		return gson.toJson(quizz.getUtilisateur());
+	}
+	
 	/**
 	 * Add a quizz in DB using form passed in POST Request
 	 * @param formParams POST form with quizz data
