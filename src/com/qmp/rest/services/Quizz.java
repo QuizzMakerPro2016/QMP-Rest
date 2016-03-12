@@ -14,7 +14,7 @@ import net.ko.kobject.KListObject;
 
 
 /**
- * @author aleboisselier, nBRossault
+ * @author aleboisselier
  * Quizz REST Functions
  */
 @Path("/quizz")
@@ -34,13 +34,13 @@ public class Quizz extends RestBase {
 		return gson.toJson(quizzes.asAL());
 	}
 	
-	@Path("/{id}")
+	/*@Path("/{id}")
 	public String getOne(int id){
 		KQuestionnaire quizz = KoHttp.getDao(KQuestionnaire.class).readById(id);
 		if (!quizz.isLoaded())
 			return "null";
 		return new Gson().toJson(quizz);
-	}
+	}*/
 	
 	/**
 	 * Add an answer in DB using form passed in POST Request
@@ -48,7 +48,7 @@ public class Quizz extends RestBase {
 	 * @return Error or Success Message
 	 * @throws SQLException
 	 */
-	@PUT
+	/*@PUT
 	@Path("/")
 	@Consumes("application/x-www-form-urlencoded")
 	public String addOne(MultivaluedMap<String, String> formParams)
@@ -63,5 +63,5 @@ public class Quizz extends RestBase {
 		
 		KoHttp.getDao(KQuestionnnaire.class).create(quizzes);
 		return message;
-	}
+	}*/
 }
