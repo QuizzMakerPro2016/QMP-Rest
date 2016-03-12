@@ -46,13 +46,6 @@ public class Quizz extends RestBase {
 		return gson.toJson(quizzes.asAL());
 	}
 	
-	/*@Path("/{id}")
-	public String getOne(int id){
-		KQuestionnaire quizz = KoHttp.getDao(KQuestionnaire.class).readById(id);
-		if (!quizz.isLoaded())
-			return "null";
-		return new Gson().toJson(quizz);
-	}*/
 	/**
 	 * Search a quizz with given ID
 	 * @param id of quizz to get
