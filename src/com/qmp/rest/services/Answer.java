@@ -29,7 +29,7 @@ import net.ko.kobject.KListObject;
 public class Answer extends RestBase{
 
 	/**
-	 * Return all answers
+	 * Index Function
 	 * @return JSON List of all answers
 	 */
 	@GET

@@ -26,10 +26,16 @@ public class KQuestion extends KObject {
 	private KListObject<KReponse> reponses;
 	@Expose
 	private KQuestionnaire questionnaire;
+	@Expose
+	private int idUtilisateur;
+	@Expose
+	private KUtilisateur utilisateur;
 
 	public KQuestion() {
 		super();
-		//belongsTo(KQuestionnaire.class);hasMany(KReponse.class);
+		hasMany(KReponse.class);
+		hasAndBelongsToMany(KQuestion_questionnaire.class, KQuestionnaire.class);
+		belongsTo(KUtilisateur.class);
 	}
 	/**
 	 * return the value of idQuestionnaire
@@ -102,6 +108,33 @@ public class KQuestion extends KObject {
 	public void setQuestionnaire(KQuestionnaire aQuestionnaire){
 		this.questionnaire=aQuestionnaire;
 	}
+	
+	
+	/**
+	 * @return the createdBy
+	 */
+	public int getIdUtilisateur() {
+		return idUtilisateur;
+	}
+	/**
+	 * @param createdBy the createdBy to set
+	 */
+	public void setIdUtilisateur(int createdBy) {
+		this.idUtilisateur = createdBy;
+	}
+	/**
+	 * @return the utilisateur
+	 */
+	public KUtilisateur getUtilisateur() {
+		return utilisateur;
+	}
+	/**
+	 * @param utilisateur the utilisateur to set
+	 */
+	public void setUtilisateur(KUtilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
 	@Override
 	public String toString() {
 		return " [libelle] = " + libelle+" [idQuestionnaire] = " + idQuestionnaire+" [type] = " + type;
