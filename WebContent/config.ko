@@ -1,9 +1,9 @@
 #Fichier de configuration KoCreator version 1.0.0.26
-#Tue Mar 08 14:23:42 CET 2016
+#Sat Mar 12 23:32:09 CET 2016
 actionsName=action.do
 base=rest-qcm
 cacheType=1
-classes=domaine;groupe;groupe_questionnaire;groupe_utilisateur;question;questionnaire;rang;realisation;reponse;reponse_utilisateur;utilisateur
+classes=domaine;groupe;groupe_questionnaire;groupe_utilisateur;question;question_questionnaire;questionnaire;rang;realisation;reponse;reponse_utilisateur;utilisateur
 clientDebug=false
 clientDebugOptions=true
 constraintsDepth=1

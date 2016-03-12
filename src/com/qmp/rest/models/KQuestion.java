@@ -15,9 +15,7 @@ import net.ko.kobject.KListObject;
 @Entity
 @Table(name="question")
 public class KQuestion extends KObject {
-	
-	private int idQuestionnaire;
-	
+		
 	@Expose
 	private String libelle;
 	@Expose
@@ -25,7 +23,7 @@ public class KQuestion extends KObject {
 	@Expose
 	private KListObject<KReponse> reponses;
 	@Expose
-	private KQuestionnaire questionnaire;
+	private KListObject<KQuestionnaire> questionnaires;
 	@Expose
 	private int idUtilisateur;
 	@Expose
@@ -37,13 +35,7 @@ public class KQuestion extends KObject {
 		hasAndBelongsToMany(KQuestion_questionnaire.class, KQuestionnaire.class);
 		belongsTo(KUtilisateur.class);
 	}
-	/**
-	 * return the value of idQuestionnaire
-	 * @return idQuestionnaire
-	 */
-	public int getIdQuestionnaire(){
-		return this.idQuestionnaire;
-	}
+	
 	/**
 	 * return the value of libelle
 	 * @return libelle
@@ -69,17 +61,10 @@ public class KQuestion extends KObject {
 	 * return the value of questionnaire
 	 * @return questionnaire
 	 */
-	public KQuestionnaire getQuestionnaire(){
-		return this.questionnaire;
+	public KListObject<KQuestionnaire> getQuestionnaires(){
+		return this.questionnaires;
 	}
 
-	/**
-	 * set the value of idQuestionnaire
-	 * @param aIdQuestionnaire
-	 */
-	public void setIdQuestionnaire(int aIdQuestionnaire){
-		this.idQuestionnaire=aIdQuestionnaire;
-	}
 	/**
 	 * set the value of libelle
 	 * @param aLibelle
@@ -105,8 +90,8 @@ public class KQuestion extends KObject {
 	 * set the value of questionnaire
 	 * @param aQuestionnaire
 	 */
-	public void setQuestionnaire(KQuestionnaire aQuestionnaire){
-		this.questionnaire=aQuestionnaire;
+	public void setQuestionnaires(KListObject<KQuestionnaire> aQuestionnaires){
+		this.questionnaires=aQuestionnaires;
 	}
 	
 	
@@ -137,6 +122,6 @@ public class KQuestion extends KObject {
 	
 	@Override
 	public String toString() {
-		return " [libelle] = " + libelle+" [idQuestionnaire] = " + idQuestionnaire+" [type] = " + type;
+		return " [libelle] = " + libelle+" [type] = " + type;
 	}
 }

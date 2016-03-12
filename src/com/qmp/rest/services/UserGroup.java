@@ -18,7 +18,6 @@ import net.ko.framework.KoHttp;
 import net.ko.framework.KoSession;
 
 import com.qmp.rest.models.KGroupe_utilisateur;
-import com.qmp.rest.models.KReponse;
 
 /**
  * @author Antoine

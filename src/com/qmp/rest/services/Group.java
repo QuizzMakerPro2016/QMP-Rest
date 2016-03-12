@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.qmp.rest.models.KGroupe;
-import com.qmp.rest.models.KQuestionnaire;
 
 import net.ko.framework.KoHttp;
 import net.ko.framework.KoSession;
