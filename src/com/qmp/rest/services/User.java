@@ -26,15 +26,6 @@ public class User extends CrudRestBase {
 	}
 
 	@GET
-	@Path("/{id}/groupes")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getGroupes(@PathParam("id") int id) {
-		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, id);
-		String result = gson.toJson(user.getGroupes().asAL());
-		return result;
-	}
-
-	@GET
 	@Path("/{id}/quiz")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getQuiz(@PathParam("id") int id) {
@@ -47,15 +38,6 @@ public class User extends CrudRestBase {
 		}
 		String result = gson.toJson(quizes.asAL());
 		Ko.restoreConstraintDeph();
-		return result;
-	}
-
-	@GET
-	@Path("/{id}/realisations")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getRealisations(@PathParam("id") int id) {
-		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, id);
-		String result = gson.toJson(user.getRealisations().asAL());
 		return result;
 	}
 

@@ -46,7 +46,7 @@ public class UserGroup extends CrudRestBase {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{idUser}/{idGroup}")
-	public String deleteAnswer(@PathParam("idUser") int idUser, @PathParam("idGroup") int idGroup){
+	public String delete(@PathParam("idUser") int idUser, @PathParam("idGroup") int idGroup){
 		
 		KGroupe_utilisateur usergroup = KoSession.kloadOne(KGroupe_utilisateur.class, "idUtilisateur=" + String.valueOf(idUser) + " AND idGroupe=" + String.valueOf(idGroup));
 		if(!usergroup.isLoaded()){

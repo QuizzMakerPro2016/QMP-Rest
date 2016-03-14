@@ -124,7 +124,7 @@ public abstract class CrudRestBase extends RestBase {
 	 * @return String message
 	 */
 	@PUT
-	@Path("add")
+	@Path("/add")
 	@Consumes("application/x-www-form-urlencoded")
 	public String add(MultivaluedMap<String, String> formParams) {
 		KObject object = null;
