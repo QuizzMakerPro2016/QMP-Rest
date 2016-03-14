@@ -23,6 +23,14 @@ import net.ko.kobject.KListObject;
  */
 @Path("/quizz")
 public class Quizz extends RestBase {
+	
+	public Quizz() {
+		super();
+		kobjectClass = KQuestionnaire.class;
+		displayName = "questionnaire";
+	}
+	
+	
 	/**
 	 * Index Function
 	 * @return All Quizzes Object in DB

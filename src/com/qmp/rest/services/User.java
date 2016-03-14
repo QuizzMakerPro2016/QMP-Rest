@@ -22,7 +22,7 @@ public class User extends CrudRestBase {
 	public User() {
 		super();
 		kobjectClass = KUtilisateur.class;
-		displayName = "utilisateur";
+		displayName = "user";
 	}
 
 	@GET
