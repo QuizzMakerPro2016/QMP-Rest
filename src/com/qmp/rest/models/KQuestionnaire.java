@@ -32,11 +32,16 @@ public class KQuestionnaire extends KRestObject {
 	private int idUtilisateur;
 	@Expose
 	private KUtilisateur utilisateur;
+	@Expose
+	private KListObject<KGroupe> groupes;
 
+	
+	
 	public KQuestionnaire() {
 		super();
 		hasMany(KRealisation.class);hasMany(KGroupe_questionnaire.class);belongsTo(KDomaine.class);
 		hasAndBelongsToMany(KQuestion_questionnaire.class, KQuestion.class);
+		hasAndBelongsToMany(KGroupe_questionnaire.class, KGroupe.class);
 		belongsTo(KUtilisateur.class);
 	}
 	/**
