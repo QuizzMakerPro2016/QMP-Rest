@@ -26,7 +26,7 @@ import net.ko.kobject.KListObject;
  * Answers REST Functions
  */
 @Path("/answer")
-public class Answer extends RestBase{
+public class Answer extends CrudRestBase {
 
 	/**
 	 * Index Function

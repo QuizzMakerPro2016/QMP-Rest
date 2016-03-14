@@ -14,7 +14,7 @@ import net.ko.kobject.KListObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="domaine")
-public class KDomaine extends KObject {
+public class KDomaine extends KRestObject {
 	
 	@Expose
 	private String libelle;

@@ -14,7 +14,7 @@ import net.ko.kobject.KListObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="questionnaire")
-public class KQuestionnaire extends KObject {
+public class KQuestionnaire extends KRestObject {
 	@Expose
 	private java.sql.Date date;
 	private int idDomaine;

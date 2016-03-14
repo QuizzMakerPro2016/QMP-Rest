@@ -14,7 +14,7 @@ import net.ko.persistence.annotation.Id;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="reponse_utilisateur")
-public class KReponse_utilisateur extends KObject {
+public class KReponse_utilisateur extends KRestObject {
 	@Id
 	private int idRealisation;
 	@Id

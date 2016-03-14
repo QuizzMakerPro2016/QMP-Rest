@@ -14,7 +14,7 @@ import net.ko.kobject.KListObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="utilisateur")
-public class KUtilisateur extends KObject {
+public class KUtilisateur extends KRestObject {
 	private int idRang;
 	@Expose
 	private String mail;

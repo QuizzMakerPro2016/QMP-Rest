@@ -24,7 +24,7 @@ import com.qmp.rest.models.KDomaine;
  * Domain REST Functions
  */
 @Path("/domain")
-public class Domain extends RestBase {
+public class Domain extends CrudRestBase {
 	
 	/**
 	 * Return all Domains

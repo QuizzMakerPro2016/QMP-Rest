@@ -14,7 +14,7 @@ import net.ko.kobject.KListObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="reponse")
-public class KReponse extends KObject {
+public class KReponse extends KRestObject {
 	@Expose
 	private boolean good;
 	private int idQuestion;

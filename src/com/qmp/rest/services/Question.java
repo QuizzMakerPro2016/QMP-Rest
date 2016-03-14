@@ -30,7 +30,7 @@ import com.qmp.rest.models.KQuestionnaire;
  *
  */
 @Path("/question")
-public class Question extends RestBase {
+public class Question extends CrudRestBase {
 	
 	/**
 	 * Index Function

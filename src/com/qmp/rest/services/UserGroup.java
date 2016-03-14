@@ -24,7 +24,7 @@ import com.qmp.rest.models.KGroupe_utilisateur;
  *
  */
 @Path("/usergroup")
-public class UserGroup extends RestBase {
+public class UserGroup extends CrudRestBase {
 	
 	/**
 	 * Assign a user to a group in DB using form passed in POST Request

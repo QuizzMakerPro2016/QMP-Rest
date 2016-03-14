@@ -14,7 +14,7 @@ import net.ko.kobject.KListObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="realisation")
-public class KRealisation extends KObject {
+public class KRealisation extends KRestObject {
 	@Expose
 	private java.sql.Date date;
 	private int idQuestionnaire;

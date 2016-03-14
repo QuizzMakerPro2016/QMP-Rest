@@ -14,7 +14,7 @@ import net.ko.kobject.KListObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="rang")
-public class KRang extends KObject {
+public class KRang extends KRestObject {
 	@Expose
 	private String libelle;
 	@Expose
