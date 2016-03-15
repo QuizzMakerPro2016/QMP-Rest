@@ -46,7 +46,7 @@ public class User extends CrudRestBase {
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String connect(@FormParam("login") String login, @FormParam("password") String password) {
-		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, "login='" + login + "'");
+		KUtilisateur user = KoSession.kloadOne(KUtilisateur.class, "mail='" + login + "'");
 		String result = returnMessage("Login ou mot de passe invalides", true);
 
 		if (user.isLoaded()) {
