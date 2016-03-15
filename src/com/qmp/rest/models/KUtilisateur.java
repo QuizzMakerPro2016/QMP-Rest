@@ -37,7 +37,7 @@ public class KUtilisateur extends KRestObject {
 	private KListObject<KQuestion> questions;
 	
 	@Expose 
-	private KListObject<KQuestion> questionnaires;
+	private KListObject<KQuestionnaire> questionnaires;
 
 	public KUtilisateur() {
 		super();
@@ -167,13 +167,13 @@ public class KUtilisateur extends KRestObject {
 	/**
 	 * @return the questionnaires
 	 */
-	public KListObject<KQuestion> getQuestionnaires() {
+	public KListObject<KQuestionnaire> getQuestionnaires() {
 		return questionnaires;
 	}
 	/**
 	 * @param questionnaires the questionnaires to set
 	 */
-	public void setQuestionnaires(KListObject<KQuestion> questionnaires) {
+	public void setQuestionnaires(KListObject<KQuestionnaire> questionnaires) {
 		this.questionnaires = questionnaires;
 	}
 	@Override
