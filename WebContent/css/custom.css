@@ -1,0 +1,22 @@
+body{
+	background-image: url("../images/backgroundblacksharp.png");
+}
+#menu-large{
+	height: 50px;
+	margin-bottom: 0px;
+}
+#background-white{
+	background-color: white;
+	min-height: 500px;
+	padding: 15px;
+
+}
+
+#background-black{
+	background-color: #1b1c1d;
+	min-height: 50px;
+}
+
+.material-shadow{
+	box-shadow: 0px 7px 10px 0px #353535;
+}
