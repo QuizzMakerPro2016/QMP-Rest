@@ -17,7 +17,10 @@
 	<script type="text/javascript" src="messages.kjs"></script>
 	<script type="text/javascript" src="<%=path%>/js/semantic.js"></script>
 	<link rel="stylesheet" href="<%=path%>/css/semantic.min.css">
+	<link rel="stylesheet" href="<%=path%>/css/semantic.min.css">
 	<link rel="stylesheet" href="<%=path%>/css/custom.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
 	
 	<title>QMP-REST-DOC</title>
 </head>

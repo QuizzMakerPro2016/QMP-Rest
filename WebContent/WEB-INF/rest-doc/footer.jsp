@@ -2,7 +2,7 @@
 <div class="ui container">
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
-    <img src="<%= path %>/images/logo-10.png" class="ui mini centered image">
+    <img src="<%= request.getServletContext().getContextPath() %>/images/logo-10.png" class="ui mini centered image">
       <div class="ui inverted section divider"></div>
       
       <div class="ui horizontal inverted small divided link list">
