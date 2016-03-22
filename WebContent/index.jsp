@@ -1,16 +1,17 @@
 <%@include file="WEB-INF/rest-doc/header.jsp" %>
-
+<%@page import="net.ko.framework.KoHttp"%>
 		<h2 class="ui dividing header">QuizzMakerPro API Doc</h2>
 		<div class="ui message brown">
 			<div class="content">
 				<div class="header">
-				The QMP-REST Api let you have access to all informations concerning users, quizz and more.
+				L'API QMP-REST vous permet d'accéder aux informations des questionnaires, des utilisateurs...
 				</div>
 			</div>
 		</div>
-		<p>This page gives you all the informations you need to know to use the API, you can navigate throughout the navbar or just click one of the button below. </p>
-		<button class="ui basic button">
-		  <i class="icon user"></i>
+		<p>Cette page vous permet d'accéder aux differentes sections de la documentation de l'API. </p>
+		<h6></h6>
+		<button class="ui basic button" id="btnUser">
+		  <i class="alarm icon"></i>
 		  User
 		</button>
 		<button class="ui basic button">
@@ -41,6 +42,15 @@
 		  <i class="icon user"></i>
 		  Rank
 		</button>
+		<div class="content">
 		
+		</div>	
 	
+	<a href="#" class="btn" id="btnOk">Okay...</a>
+
+	<div id="response">
+	
+	</div>
+	<%=KoHttp.kajaxIncludes(request) %>
+
 <%@include file="WEB-INF/rest-doc/footer.jsp" %>

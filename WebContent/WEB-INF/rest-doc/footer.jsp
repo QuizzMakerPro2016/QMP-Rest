@@ -1,4 +1,5 @@
 </div>
+<div class="ui container">
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
     <img src="<%= path %>/images/logo-10.png" class="ui mini centered image">
@@ -11,9 +12,10 @@
       </div>
     </div>
   </div>
+  </div>
 </body>
 <script>
-$('#dropdown-menu')
+jQuery('#dropdown-menu')
 .dropdown()
 ;
 </script>
