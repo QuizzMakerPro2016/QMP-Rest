@@ -1,6 +1,7 @@
 package com.qmp.rest.services;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.function.Function;
 
 import javax.ws.rs.Consumes;
@@ -220,4 +221,29 @@ public abstract class CrudRestBase extends RestBase {
 	public String getListMember(@PathParam("id") int id, @PathParam("member") String member) {
 		return getListMember(id, member, null);
 	}
+	
+	@GET
+	@Path("/all/{timestamp}/{cd}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getModified(@PathParam("timestamp") int timestamp, @PathParam("cd") int cd) {
+		if(timestamp == 0)
+			return getAll(cd);
+		
+		if( context.getAttribute(kobjectClass.getSimpleName()) == null)
+			context.setAttribute(kobjectClass.getSimpleName(), new Date().getTime());
+		
+		if( (long) context.getAttribute(kobjectClass.getSimpleName()) > timestamp)
+			return getAll(cd);
+		
+		return "false";
+	}
+	
+	@GET
+	@Path("/all/{timestamp}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getModified(@PathParam("timestamp") int timestamp) {
+		return getModified(timestamp, (Integer) null);
+	}
+	
+
 }
