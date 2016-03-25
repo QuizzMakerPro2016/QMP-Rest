@@ -264,7 +264,7 @@
 				<div class="title">
 					<div class="ui grid put">
 						<div class="ui column center aligned one wide request">PUT</div>
-						<div class="ui column six wide url"><code>/user</code></div>
+						<div class="ui column six wide url"><code>/user/add</code></div>
 						<div class="ui column right aligned nine wide description"><i>Ajouter un utilisateur</i></div>
 					</div>
 				</div>
@@ -276,7 +276,7 @@
 						<div class="ui divider"></div>
 
 						<h4><i class="settings icon"></i>Paramètres</h4>
-						<form class="ui form">
+						<form class="ui form" id="put-user">
 							Aucun Paramètre pour cette fonction...
 							
 							<div class="ui divider"></div>
@@ -319,10 +319,14 @@
 								</tbody>
 							</table>
 
-							<button class="ui right labeled icon button brown">
+							<a class="ui right labeled icon button brown btn-ajax" data-ajax="user/add" data-request="PUT" data-container="div#put-user" data-form="form#put-user">
 							  <i class="right arrow icon"></i>
 							  Tester
-							</button>
+							</a>
+							<div id="put-user" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -345,7 +349,7 @@
 						<div class="ui divider"></div>
 
 						<h4><i class="settings icon"></i>Paramètres</h4>
-						<form class="ui form">
+						<form class="ui form" id="delete-user">
 							<table class="ui celled table">
 								<thead>
 									<tr>
@@ -357,20 +361,22 @@
 								<tbody>
 									<tr>
 										<td><code>id</code></td>
-										<td><input type="text" name="count" id="count" placeholder="id"></td>
+										<td><input type="text" name="param-id" id="id" placeholder="id"></td>
 										<td>Identifiant de l'utilisateur à supprimer</td>
 									</tr>
 								</tbody>
 							</table>
-							<button class="ui right labeled icon button red">
+							<a class="ui right labeled icon button red btn-ajax" data-ajax="user/{id}" data-request="DELETE" data-container="div#delete-user" data-form="form#delete-user">
 							  <i class="right arrow icon"></i>
 							  Tester
-							</button>
+							</a>
+							<div id="delete-user" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
 						</form>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 	</div>
