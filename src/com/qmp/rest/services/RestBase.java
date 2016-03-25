@@ -1,18 +1,18 @@
 package com.qmp.rest.services;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MultivaluedMap;
+
+import net.ko.framework.KoHttp;
+import net.ko.kobject.KListObject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.qmp.adapters.KlistObjectAdapter;
-
-import net.ko.framework.KoHttp;
-import net.ko.kobject.KListObject;
-import net.ko.kobject.KObject;
 
 public class RestBase {
 	
@@ -65,7 +65,12 @@ public class RestBase {
 		String jsonEnd = "";
 		if (!"".equals(keyValues))
 			jsonEnd = "," + keyValues;
-		return "{\"message\":\"" + message + "\",\"" + key + "\":" + gson.toJson(value) + jsonEnd + "}";
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("message", message);
+		map.put(key, value);
+		return gson.toJson(map);
+//		return "{message:\"" + message + "\"," + key + ":" + gson.toJson(value) + jsonEnd + "}";
 	}
 
 	/**
@@ -109,6 +114,10 @@ public class RestBase {
 	 * @return
 	 */
 	protected String returnMessage(String message, boolean hasError) {
-		return "{\"message\":\"" + message + "\",\"error\":" + hasError + "}";
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("message", message);
+		map.put("error", hasError);
+		return gson.toJson(map);
+		//return "{\"message\":\"" + message + "\",\"error\":" + hasError + "}";
 	}
 }

@@ -188,7 +188,7 @@
 						<div class="ui divider"></div>
 
 						<h4><i class="settings icon"></i>Paramètres</h4>
-						<form class="ui form">
+						<form class="ui form" id="post-user">
 							<table class="ui celled table">
 								<thead>
 									<tr>
@@ -200,13 +200,8 @@
 								<tbody>
 									<tr>
 										<td><code>id</code></td>
-										<td><input type="text" name="last-name" placeholder="id"></td>
-										<td>Identifiant de l'utilisateur à modifier.</td>
-									</tr>
-									<tr>
-										<td><b>(Optionnel)</b> <code>cd</code></td>
-										<td><input type="text" name="last-name" placeholder="cd"></td>
-										<td>"Constraint Depth" = profondeur de recherche des entités liées.<br> <b>Défaut : </b> 1</td>
+										<td><input type="text" name="param-id" data-default="" placeholder="id"></td>
+										<td>Identifiant de l'utilisateur à rechercher</td>
 									</tr>
 								</tbody>
 							</table>
@@ -251,10 +246,14 @@
 								</tbody>
 							</table>
 
-							<button class="ui right labeled icon button green">
+							<a class="ui right labeled icon button green btn-ajax" data-ajax="user/update/{id}" data-request="POST" data-container="div#post-user" data-form="form#post-user">
 							  <i class="right arrow icon"></i>
 							  Tester
-							</button>
+							</a>
+							<div id="post-user" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
 						</form>
 					</div>
 				</div>

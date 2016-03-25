@@ -9,11 +9,9 @@ jQuery('.ui.accordion').accordion();
 		var elt = jQuery(this);
 
 		var baseUrl = "http://localhost:8080/QMP-Rest/rest/";
-		//jQueryurlToShow = jQuerybaseUrl;
 		var urlToShow = "http://qmp.com/api-v1/"
 
 		var extUrl = elt.attr('data-ajax');
-
 
 
 		jQuery(elt.attr("data-container")).find("code").parent().hide("fast");
@@ -28,17 +26,15 @@ jQuery('.ui.accordion').accordion();
 		var url = baseUrl + extUrl;
 		urlToShow +=  extUrl;
 
-		console.log(value);
-		console.log(url);
-
-
 		jQuery(elt.attr("data-container")).find(".msg").html('<div class="ui icon message"><i class="notched circle loading icon"></i><div class="content"><div class="header">Loading</div><p>Request is being Loaded.</p></div></div>');
-
+		
+		var method = elt.attr('data-request');
+		
 		jQuery.ajax({
 			crossDomain:true,
-		  method: elt.attr('data-request'),
+		  method: method,
 		  url: url,
-		  data: jQuery(elt.attr("data-form")).serialize()
+		  data: (method == "GET" || method == "DELETE") ? null : jQuery(elt.attr("data-form")).serialize() 
 		})
 		.fail(function(xhr, textStatus, errorThrown) {
 			var statusText = xhr.statusText;
@@ -48,7 +44,7 @@ jQuery('.ui.accordion').accordion();
 			jQuery(elt.attr("data-container")).find("code").html("");
 		})
 		.done(function(data, status, xhr) {
-			console.log(xhr);
+			if(IsJsonString(data)) data = JSON.parse(data);
 			jQuery(elt.attr("data-container")).find("code").html(JSON.stringify(data, null, 4));
 			jQuery('code.highlight').each(function(i, block) {
 				hljs.highlightBlock(block);
@@ -57,3 +53,12 @@ jQuery('.ui.accordion').accordion();
 			jQuery(elt.attr("data-container")).find(".msg").html('<div class="ui icon green message"><i class="checkmark icon"></i><div class="content"><div class="header">'+xhr.status+' - '+xhr.statusText+'</div><p>'+urlToShow+'</p></div></div>');
 		});
 	});
+	
+	function IsJsonString(str) {
+	    try {
+	        JSON.parse(str);
+	    } catch (e) {
+	        return false;
+	    }
+	    return true;
+	}
