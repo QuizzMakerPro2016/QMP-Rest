@@ -229,10 +229,12 @@ public abstract class CrudRestBase extends RestBase {
 		if(timestamp == 0)
 			return getAll(cd);
 		
-		if( context.getAttribute(kobjectClass.getSimpleName()) == null)
-			context.setAttribute(kobjectClass.getSimpleName(), new Date().getTime());
+		long localTimestamp = timestamp-1;
 		
-		if( (long) context.getAttribute(kobjectClass.getSimpleName()) > timestamp)
+		if( this.context.getAttribute(kobjectClass.getSimpleName()) != null)
+			localTimestamp = (long) this.context.getAttribute(kobjectClass.getSimpleName());
+		
+		if( localTimestamp > timestamp)
 			return getAll(cd);
 		
 		return "false";
