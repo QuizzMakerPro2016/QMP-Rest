@@ -37,7 +37,8 @@ jQuery('.ui.accordion').accordion();
 		jQuery.ajax({
 			crossDomain:true,
 		  method: elt.attr('data-request'),
-		  url: url
+		  url: url,
+		  data: jQuery(elt.attr("data-form")).serialize()
 		})
 		.fail(function(xhr, textStatus, errorThrown) {
 			var statusText = xhr.statusText;

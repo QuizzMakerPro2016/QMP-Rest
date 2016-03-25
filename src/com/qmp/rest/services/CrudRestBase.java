@@ -223,9 +223,9 @@ public abstract class CrudRestBase extends RestBase {
 	}
 	
 	@GET
-	@Path("/all/{timestamp}/{cd}")
+	@Path("/modif/{timestamp}/{cd}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getModified(@PathParam("timestamp") int timestamp, @PathParam("cd") Integer cd) {
+	public String getModified(@PathParam("timestamp") long timestamp, @PathParam("cd") Integer cd) {
 		if(timestamp == 0)
 			return getAll(cd);
 		
@@ -239,9 +239,9 @@ public abstract class CrudRestBase extends RestBase {
 	}
 	
 	@GET
-	@Path("/all/{timestamp}")
+	@Path("/modif/{timestamp}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getModified(@PathParam("timestamp") int timestamp) {
+	public String getModified(@PathParam("timestamp") long timestamp) {
 		return getModified(timestamp, null);
 	}
 	
