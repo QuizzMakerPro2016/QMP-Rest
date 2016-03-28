@@ -11,45 +11,43 @@
 		<p>Cette page vous permet d'accéder aux differentes sections de la documentation de l'API. </p>
 		<h6></h6>
 		<button class="ui basic button" id="btnUser">
-		  <i class="alarm icon"></i>
+		  <i class="user icon "></i>
 		  User
 		</button>
-		<button class="ui basic button">
-		  <i class="icon user"></i>
+		<button class="ui basic button" id="btnGroup">
+		  <i class="users icon"></i>
 		  Group
 		</button>
 		<button class="ui basic button">
-		  <i class="icon user"></i>
+		  <i class=" users icon"></i>
 		  UserGroup
 		</button>
 		<button class="ui basic button">
-		  <i class="icon user"></i>
+		  <i class="help icon"></i>
 		  Quizz
 		</button>
 		<button class="ui basic button">
-		  <i class="icon user"></i>
+		  <i class="checkmark box icon"></i>
 		  Question
 		</button>
 		<button class="ui basic button">
-		  <i class="icon user"></i>
+		  <i class="quote right icon"></i>
 		  Answer
 		</button>
 		<button class="ui basic button">
-		  <i class="icon user"></i>
+		  <i class="university icon"></i>
 		  Domain
 		</button>
 		<button class="ui basic button">
-		  <i class="icon user"></i>
+		  <i class="sitemap icon"></i>
 		  Rank
 		</button>
 		<div class="content">
 		
 		</div>	
-	
-	<a href="#" class="btn" id="btnOk">Okay...</a>
 
 	<div id="response">
-	
+	<h3 style="text-align: center;"><i class="find icon"></i> Aucune documentation n'a encore été chargée ! Cliquez sur un bouton pour en charger une. <i class="find icon"></i></h3>
 	</div>
 	<%=KoHttp.kajaxIncludes(request) %>
 

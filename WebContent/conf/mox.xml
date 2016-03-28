@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <mainController xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://api.kobject.net/xml/mapping-1.0.0.25b.xsd">
 	<mappings>
+        <mapping requestURL="/group.do" responseURL="WEB-INF/rest-doc/group.jsp"/>
         <mapping requestURL="/user.do" responseURL="WEB-INF/rest-doc/user.jsp"/>
         <mapping requestURL="/index.do" responseURL="/index.jsp"/>
+        
     </mappings>
 	<filters/>
 	<ajax-includes>
         <request requestURL="/index.do">
             <js triggerEvent="click" triggerSelector="#btnUser">
                 <include targetId="response" targetURL="user.do"/>
+            </js>
+        </request>
+        <request requestURL="/index.do">
+            <js triggerEvent="click" triggerSelector="#btnGroup">
+                <include targetId="response" targetURL="group.do"/>
             </js>
         </request>
     </ajax-includes>

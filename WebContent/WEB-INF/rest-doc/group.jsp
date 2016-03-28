@@ -1,4 +1,5 @@
-<h3>Utilisateurs API</h3>
+
+<h3>Groupes API</h3>
 <div class="ui container">
 	<div class="row">
 		<div class="column">
@@ -8,14 +9,14 @@
 				<div class="title">
 					<div class="ui grid get">
 						<div class="ui column center aligned one wide request">GET</div>
-						<div class="ui column six wide url"><code>/user/all</code></div>
-						<div class="ui column right aligned nine wide description"><i>Récupérer tous les utilisateurs</i></div>
+						<div class="ui column six wide url"><code>/group/all</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer tous les groupes</i></div>
 					</div>
 				</div>
 				<div class="get-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Récupérer tous les utilisateurs de la base de données.</p>
+						<p>Récupérer tous les groupes de la base de données.</p>
 
 						<div class="ui divider"></div>
 
@@ -37,7 +38,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/all/{cd}" data-request="GET" data-container="div#get-users-all" data-form="form#get-users-all">
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="group/all/{cd}" data-request="GET" data-container="div#get-users-all" data-form="form#get-users-all">
 							  <i class="right arrow icon"></i>
 							  Tester
 							</a>
@@ -54,14 +55,14 @@
 				<div class="title">
 					<div class="ui grid get">
 						<div class="ui column center aligned one wide request">GET</div>
-						<div class="ui column six wide url"><code>/user/{id}</code></div>
-						<div class="ui column right aligned nine wide description"><i>Récupérer un utilisateur par son <code>id</code></i></div>
+						<div class="ui column six wide url"><code>/group/{id}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer un groupe par son <code>id</code></i></div>
 					</div>
 				</div>
 				<div class="get-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Rechercher un utilisateur spécifique dans la base de données, par son <code>id</code>.</p>
+						<p>Rechercher un groupe spécifique dans la base de données, par son <code>id</code>.</p>
 
 						<div class="ui divider"></div>
 
@@ -79,7 +80,7 @@
 									<tr>
 										<td><code>id</code></td>
 										<td><input type="text" name="param-id" data-default="" placeholder="id"></td>
-										<td>Identifiant de l'utilisateur à rechercher</td>
+										<td>Identifiant du groupe à rechercher</td>
 									</tr>
 									<tr>
 										<td><b>(Optionnel)</b> <code>cd</code></td>
@@ -88,7 +89,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/{id}/{cd}" data-request="GET" data-container="div#get-users-id" data-form="form#get-users-id">
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="group/{id}/{cd}" data-request="GET" data-container="div#get-users-id" data-form="form#get-users-id">
 							  <i class="right arrow icon"></i>
 							  Tester
 							</a>
@@ -104,14 +105,14 @@
 				<div class="title">
 					<div class="ui grid get">
 						<div class="ui column center aligned one wide request">GET</div>
-						<div class="ui column six wide url"><code>/user/{id}/one/{member}</code></div>
-						<div class="ui column right aligned nine wide description"><i>Récupérer le membre d'un utilisateur par son <code>id</code></i></div>
+						<div class="ui column six wide url"><code>/group/{id}/one/{member}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer le membre d'un groupe par son <code>id</code></i></div>
 					</div>
 				</div>
 				<div class="get-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Rechercher un utilisateur spécifique dans la base de données, par son <code>id</code>, et donner le membre spécifié.</p>
+						<p>Rechercher un groupe spécifique dans la base de données, par son <code>id</code>, et donner le membre spécifié.</p>
 
 						<div class="ui divider"></div>
 
@@ -129,7 +130,7 @@
 									<tr>
 										<td><code>id</code></td>
 										<td><input type="text" name="param-id" data-default="" placeholder="id"></td>
-										<td>Identifiant de l'utilisateur à rechercher</td>
+										<td>Identifiant du groupe à rechercher</td>
 									</tr>
 									<tr>
 										<td><code>member</code></td>
@@ -137,20 +138,15 @@
 											<div class="field">
 												<select class="ui dropdown" name="param-gr-member" data-field="#param-member-get-users-member">
 													<option value="id">ID</option>
-													<option value="nom">Nom</option>
-													<option value="prenom">Prénom</option>
-													<option value="mail">Mail</option>
-													<option value="password">Mot de Passe</option>
-													<option value="rang">Rang</option>
-													<option value="questions">Questions</option>
+													<option value="libelle">Libelle</option>
+													<option value="code">Code</option>
+													<option value="utilisateurs">Utilisateurs</option>
 													<option value="questionnaires">Questionnaires</option>
-													<option value="realisations">Réalisations</option>
-													<option value="groupes">Groupes</option>
 												</select>
 												<input type="hidden" value="id" data-default="id" name="param-member" id="param-member-get-users-member">
 											</div>
 										</td>
-										<td>Membre de l'utilisateur à afficher</td>
+										<td>Membre du groupe à afficher</td>
 									</tr>
 									<tr>
 										<td><b>(Optionnel)</b> <code>cd</code></td>
@@ -159,7 +155,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/{id}/one/{member}/{cd}" data-request="GET" data-container="div#get-users-member" data-form="form#get-users-member">
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="group/{id}/one/{member}/{cd}" data-request="GET" data-container="div#get-users-member" data-form="form#get-users-member">
 							  <i class="right arrow icon"></i>
 							  Tester
 							</a>
@@ -176,14 +172,14 @@
 				<div class="title">
 					<div class="ui grid post">
 						<div class="ui column center aligned one wide request">POST</div>
-						<div class="ui column six wide url"><code>/user/{id}</code></div>
-						<div class="ui column right aligned nine wide description"><i>Mettre à jour un utilisateur</i></div>
+						<div class="ui column six wide url"><code>/group/{id}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Mettre à jour un groupe</i></div>
 					</div>
 				</div>
 				<div class="post-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Mettre à jour l'utilisateur d'id <code>{id}</code> avec les données passées par un formulaire HTTP.</p>
+						<p>Mettre à jour le groupe d'id <code>{id}</code> avec les données passées par un formulaire HTTP.</p>
 
 						<div class="ui divider"></div>
 
@@ -201,7 +197,7 @@
 									<tr>
 										<td><code>id</code></td>
 										<td><input type="text" name="param-id" data-default="" placeholder="id"></td>
-										<td>Identifiant de l'utilisateur à rechercher</td>
+										<td>Identifiant du groupe à rechercher</td>
 									</tr>
 								</tbody>
 							</table>
@@ -219,34 +215,19 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><code>mail</code></td>
-										<td><input type="text" name="mail" placeholder="mail"></td>
-										<td>Adresse Email de l'utilisateur</td>
+										<td><code>libelle</code></td>
+										<td><input type="text" name="libelle" placeholder="libelle"></td>
+										<td>Libelle du groupe</td>
 									</tr>
 									<tr>
-										<td><code>password</code></td>
-										<td><input type="text" name="password" placeholder="password"></td>
-										<td>Mot de passe de l'utilisateur</td>
-									</tr>
-									<tr>
-										<td><code>nom</code></td>
-										<td><input type="text" name="nom" placeholder="nom"></td>
-										<td>Nom de Famille de l'utilisateur</td>
-									</tr>
-									<tr>
-										<td><code>prenom</code></td>
-										<td><input type="text" name="prenom" placeholder="prenom"></td>
-										<td>Prénom de l'utilisateur</td>
-									</tr>
-									<tr>
-										<td><code>idRang</code></td>
-										<td><input type="text" name="idRang" placeholder="idRang"></td>
-										<td>Identifiant du rang de l'utilisateur</td>
+										<td><code>code</code></td>
+										<td><input type="text" name="code" placeholder="code"></td>
+										<td>Code du groupe</td>
 									</tr>
 								</tbody>
 							</table>
 
-							<a class="ui right labeled icon button green btn-ajax" data-ajax="user/update/{id}" data-request="POST" data-container="div#post-user" data-form="form#post-user">
+							<a class="ui right labeled icon button green btn-ajax" data-ajax="group/update/{id}" data-request="POST" data-container="div#post-user" data-form="form#post-user">
 							  <i class="right arrow icon"></i>
 							  Tester
 							</a>
@@ -264,14 +245,14 @@
 				<div class="title">
 					<div class="ui grid put">
 						<div class="ui column center aligned one wide request">PUT</div>
-						<div class="ui column six wide url"><code>/user/add</code></div>
-						<div class="ui column right aligned nine wide description"><i>Ajouter un utilisateur</i></div>
+						<div class="ui column six wide url"><code>/group/add</code></div>
+						<div class="ui column right aligned nine wide description"><i>Ajouter un groupe</i></div>
 					</div>
 				</div>
 				<div class="put-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Ajouter un nouvel utilisateur avec les données passées par un formulaire HTTP.</p>
+						<p>Ajouter un nouveau groupe avec les données passées par un formulaire HTTP.</p>
 
 						<div class="ui divider"></div>
 
@@ -292,34 +273,19 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><code>mail</code></td>
-										<td><input type="text" name="mail" placeholder="mail"></td>
-										<td>Adresse Email de l'utilisateur</td>
+										<td><code>libelle</code></td>
+										<td><input type="text" name="libelle" placeholder="libelle"></td>
+										<td>Libelle du groupe</td>
 									</tr>
 									<tr>
-										<td><code>password</code></td>
-										<td><input type="text" name="password" placeholder="password"></td>
-										<td>Mot de passe de l'utilisateur</td>
-									</tr>
-									<tr>
-										<td><code>nom</code></td>
-										<td><input type="text" name="nom" placeholder="nom"></td>
-										<td>Nom de Famille de l'utilisateur</td>
-									</tr>
-									<tr>
-										<td><code>prenom</code></td>
-										<td><input type="text" name="prenom" placeholder="prenom"></td>
-										<td>Prénom de l'utilisateur</td>
-									</tr>
-									<tr>
-										<td><code>idRang</code></td>
-										<td><input type="text" name="idRang" placeholder="idRang"></td>
-										<td>Identifiant du rang de l'utilisateur</td>
+										<td><code>code</code></td>
+										<td><input type="text" name="code" placeholder="code"></td>
+										<td>Code du groupe</td>
 									</tr>
 								</tbody>
 							</table>
 
-							<a class="ui right labeled icon button brown btn-ajax" data-ajax="user/add" data-request="PUT" data-container="div#put-user" data-form="form#put-user">
+							<a class="ui right labeled icon button brown btn-ajax" data-ajax="group/add" data-request="PUT" data-container="div#put-user" data-form="form#put-user">
 							  <i class="right arrow icon"></i>
 							  Tester
 							</a>
@@ -336,15 +302,15 @@
 				<div class="title">
 					<div class="ui grid delete">
 						<div class="ui column center aligned one wide request">DELETE</div>
-						<div class="ui column six wide url"><code>/user/{id}</code></div>
-						<div class="ui column right aligned nine wide description"><i>Supprimer un utilisateur existant</i></div>
+						<div class="ui column six wide url"><code>/group/{id}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Supprimer un groupe existant</i></div>
 					</div>
 				</div>
 		
 				<div class="delete-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Supprime un utilisateur par son <code>{id}</code>.</p>
+						<p>Supprime un groupe par son <code>{id}</code>.</p>
 
 						<div class="ui divider"></div>
 
@@ -362,11 +328,11 @@
 									<tr>
 										<td><code>id</code></td>
 										<td><input type="text" name="param-id" id="id" placeholder="id"></td>
-										<td>Identifiant de l'utilisateur à supprimer</td>
+										<td>Identifiant du groupe à supprimer</td>
 									</tr>
 								</tbody>
 							</table>
-							<a class="ui right labeled icon button red btn-ajax" data-ajax="user/{id}" data-request="DELETE" data-container="div#delete-user" data-form="form#delete-user">
+							<a class="ui right labeled icon button red btn-ajax" data-ajax="group/{id}" data-request="DELETE" data-container="div#delete-user" data-form="form#delete-user">
 							  <i class="right arrow icon"></i>
 							  Tester
 							</a>
