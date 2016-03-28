@@ -1,7 +1,6 @@
 package com.qmp.rest.services;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.function.Function;
 
 import javax.ws.rs.Consumes;
