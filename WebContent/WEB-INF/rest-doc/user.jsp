@@ -171,6 +171,62 @@
 					</div>
 				</div>
 
+			<!-- POST -->	
+
+				<div class="title">
+					<div class="ui grid post">
+						<div class="ui column center aligned one wide request">POST</div>
+						<div class="ui column six wide url"><code>/user/connect</code></div>
+						<div class="ui column right aligned nine wide description"><i>Vérifie si un utilisateur peut se connecter</i></div>
+					</div>
+				</div>
+				<div class="post-content content"><br>
+					<div style="margin:15px;">
+						<h4><i class="tag icon"></i>Description</h4>
+						<p>Vérifie que le couple <code>login</code>/<code>password</code> passé par un formulaire HTTP correspondent bien à un utilisateur et qu'il peut donc se connecter.</p>
+
+						<div class="ui divider"></div>
+
+						<h4><i class="settings icon"></i>Paramètres</h4>
+						<form class="ui form" id="post-user">
+							<div class="ui divider"></div>
+							<h4><i class="file text outline icon"></i>Formulaire</h4>
+							<table class="ui celled table">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>mail</code></td>
+										<td><input type="text" name="login" placeholder="mail"></td>
+										<td>Adresse Email de l'utilisateur</td>
+									</tr>
+									<tr>
+										<td><code>password</code></td>
+										<td><input type="text" name="password" placeholder="password"></td>
+										<td>Mot de passe de l'utilisateur</td>
+									</tr>
+										<td><input type="hidden" name="cd" value="0"></td>
+
+								</tbody>
+							</table>
+
+							<a class="ui right labeled icon button green btn-ajax" data-ajax="user/connect" data-request="POST" data-container="div#post-user" data-form="form#post-user">
+							  <i class="right arrow icon"></i>
+							  Tester
+							</a>
+							<div id="post-user" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
+						</form>
+					</div>
+				</div>
+				
 				<!-- POST -->
 
 				<div class="title">
