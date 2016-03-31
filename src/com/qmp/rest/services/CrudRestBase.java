@@ -111,6 +111,7 @@ public abstract class CrudRestBase extends RestBase {
 		try {
 			setValuesToKObject(object, formParams);
 			KoSession.update(object);
+			 this.context.setAttribute(kobjectClass.getSimpleName(), System.currentTimeMillis());
 			message = returnValue(KString.capitalizeFirstLetter(displayName) + " `" + object + "` mis à jour", displayName, object);
 		} catch (SecurityException | IllegalAccessException | SQLException e) {
 			message = returnMessage(e.getMessage(), true);
@@ -133,6 +134,7 @@ public abstract class CrudRestBase extends RestBase {
 			object = kobjectClass.newInstance();
 			setValuesToKObject(object, formParams);
 			KoSession.add(object);
+			this.context.setAttribute(kobjectClass.getSimpleName(), System.currentTimeMillis());
 			message = returnValue(KString.capitalizeFirstLetter(displayName) + " `" + object + "` inséré", displayName, object);
 		} catch (SecurityException | IllegalAccessException | SQLException | InstantiationException e) {
 			message = returnMessage(e.getMessage(), true);
@@ -220,13 +222,68 @@ public abstract class CrudRestBase extends RestBase {
 	public String getListMember(@PathParam("id") int id, @PathParam("member") String member) {
 		return getListMember(id, member, null);
 	}
+	@GET
+	@Path("/limit/{offset}/{limit}/{cd}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllLimitOffest(@PathParam("offset") Integer offset, @PathParam("limit") Integer limit,
+			@PathParam("cd") Integer constraintDepht) {
+		if (constraintDepht != null)
+			Ko.setTempConstraintDeph(constraintDepht);
+		KListObject<? extends KObject> objects = KoSession.kloadMany(kobjectClass, "1=1 LIMIT " + offset + "," + limit);
+		if (constraintDepht != null)
+			Ko.restoreConstraintDeph();
+		String result = gson.toJson(objects.asAL());
+		return result;
+	}
+
+	@GET
+	@Path("/limit/{offset}/{limit}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllLimitOffest(@PathParam("offset") Integer offset, @PathParam("limit") Integer limit) {
+		KListObject<? extends KObject> objects = KoSession.kloadMany(kobjectClass, "1=1 LIMIT " + offset + "," + limit);
+		String result = gson.toJson(objects.asAL());
+		return result;
+	}
+
+	@GET
+	@Path("/limit/{limit}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllLimit(@PathParam("limit") Integer limit) {
+		return getAllLimitOffest(0, limit);
+	}
+
+	@GET
+	@Path("/count/{limit}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getCountLimit() {
+		String result = null;
+		try {
+			result = String.valueOf(KoSession.count(kobjectClass));
+		} catch (SQLException e) {
+			result = null;
+		}
+		return result;
+	}
+	
+	@GET
+	@Path("/count")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getCount() {
+		String result = null;
+		try {
+			result = String.valueOf(KoSession.count(kobjectClass));
+		} catch (SQLException e) {
+			result = null;
+		}
+		return result;
+	}
 	
 	@GET
 	@Path("/modif/{timestamp}/{cd}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getModified(@PathParam("timestamp") long timestamp, @PathParam("cd") Integer cd) {
 		if(timestamp == 0)
-			return getAll(cd);
+			return "true";
 		
 		long localTimestamp = timestamp-1;
 		
@@ -234,7 +291,7 @@ public abstract class CrudRestBase extends RestBase {
 			localTimestamp = (long) this.context.getAttribute(kobjectClass.getSimpleName());
 		
 		if( localTimestamp > timestamp)
-			return getAll(cd);
+			return "true";
 		
 		return "false";
 	}
