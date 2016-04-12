@@ -99,6 +99,51 @@
 						</form>
 					</div>
 				</div>
+				
+				<!-- GET-->
+				<div class="title">
+					<div class="ui grid get">
+						<div class="ui column center aligned one wide request">GET</div>
+						<div class="ui column six wide url"><code>/user/{id}/quiz</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer les questionnaires affectés à un utilisateur</i></div>
+					</div>
+				</div>
+				<div class="get-content content"><br>
+					<div style="margin:15px;">
+						<h4><i class="tag icon"></i>Description</h4>
+						<p>Rechercher un utilisateur spécifique dans la base de données, par son <code>id</code>, et en affiche les questionnaires affectés.</p>
+
+						<div class="ui divider"></div>
+
+						<h4><i class="settings icon"></i>Paramètres</h4>
+						<form class="ui form" id="get-user-quiz">
+							<table class="ui celled table">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>id</code></td>
+										<td><input type="text" name="param-id" data-default="" placeholder="id"></td>
+										<td>Identifiant de l'utilisateur à rechercher</td>
+									</tr>
+								</tbody>
+							</table>
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/{id}/quiz" data-request="GET" data-container="div#get-user-quiz" data-form="form#get-user-quiz">
+							  <i class="right arrow icon"></i>
+							  Tester
+							</a>
+							<div id="get-user-quiz" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
+						</form>
+					</div>
+				</div>
 
 				<!-- GET-->
 				<div class="title">
