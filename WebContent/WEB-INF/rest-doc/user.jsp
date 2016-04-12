@@ -1,4 +1,6 @@
 <h3>Utilisateurs API</h3>
+
+<input type="text"/>
 <div class="ui container">
 	<div class="row">
 		<div class="column">
@@ -46,6 +48,196 @@
 								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
 							</div>
 							
+						</form>
+					</div>
+				</div>
+				
+				<!-- GET COUNT-->
+				<div class="title">
+					<div class="ui grid get">
+						<div class="ui column center aligned one wide request">GET</div>
+						<div class="ui column six wide url"><code>/user/count</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer le nombre d'utilisateurs</i></div>
+					</div>
+				</div>
+				<div class="get-content content"><br>
+					<div style="margin:15px;">
+						<h4><i class="tag icon"></i>Description</h4>
+						<p>Donne le nombre d'utilisateurs enresgitrés dans la base.</p>
+
+						<div class="ui divider"></div>
+
+						<h4><i class="settings icon"></i>Paramètres</h4>
+						<form class="ui form" id="get-users-count">
+							<table class="ui celled table">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><b>(Optionnel)</b> <code>limit</code></td>
+										<td><input type="text" name="param-limit" data-default=" " placeholder="limit"></td>
+										<td>Limite de la recherche<br><b>Défaut :</b> tous les enregistrements</td>
+									</tr>
+								</tbody>
+							</table>
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/count/{limit}" data-request="GET" data-container="div#get-users-count" data-form="form#get-users-count">
+							  <i class="right arrow icon"></i>
+							  Tester
+							</a>
+							<div id="get-users-count" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- GET LIMIT-->
+				<div class="title">
+					<div class="ui grid get">
+						<div class="ui column center aligned one wide request">GET</div>
+						<div class="ui column six wide url"><code>/user/limit/{limit}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer les utlisateurs (avec borne maximum)</i></div>
+					</div>
+				</div>
+				<div class="get-content content"><br>
+					<div style="margin:15px;">
+						<h4><i class="tag icon"></i>Description</h4>
+						<p>Donne le nombre d'utilisateurs enresgitrés dans la base (avec borne maximum et minimum).</p>
+
+						<div class="ui divider"></div>
+
+						<h4><i class="settings icon"></i>Paramètres</h4>
+						<form class="ui form" id="get-users-limit">
+							<table class="ui celled table">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>limit</code></td>
+										<td><input type="text" name="param-limit" data-default=" " placeholder="limit"></td>
+										<td>Limite de la recherche</td>
+									</tr>
+								</tbody>
+							</table>
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/limit/{limit}" data-request="GET" data-container="div#get-users-limit" data-form="form#get-users-limit">
+							  <i class="right arrow icon"></i>
+							  Tester
+							</a>
+							<div id="get-users-limit" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- GET LIMIT OFFSET-->
+				<div class="title">
+					<div class="ui grid get">
+						<div class="ui column center aligned one wide request">GET</div>
+						<div class="ui column six wide url"><code>/user/limit/{offset}/{limit}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer les utlisateurs (avec borne maximum et minimum)</i></div>
+					</div>
+				</div>
+				<div class="get-content content"><br>
+					<div style="margin:15px;">
+						<h4><i class="tag icon"></i>Description</h4>
+						<p>Donne le nombre d'utilisateurs enresgitrés dans la base (avec borne maximum et minimum).</p>
+
+						<div class="ui divider"></div>
+
+						<h4><i class="settings icon"></i>Paramètres</h4>
+						<form class="ui form" id="get-users-limit-offset">
+							<table class="ui celled table">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>offset</code></td>
+										<td><input type="text" name="param-offset" data-default=" " placeholder="offset"></td>
+										<td>Départ de la recherche</td>
+									</tr>
+									<tr>
+										<td><code>limit</code></td>
+										<td><input type="text" name="param-limit" data-default=" " placeholder="limit"></td>
+										<td>Limite de la recherche</td>
+									</tr>
+									<tr>
+										<td><b>(Optionnel)</b> <code>cd</code></td>
+										<td><input type="text" name="param-cd" data-default="1" placeholder="cd"></td>
+										<td>"Constraint Depth" = profondeur de recherche des entités liées.<br> <b>Défaut : </b> 1</td>
+									</tr>
+								</tbody>
+							</table>
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/limit/{offset}/{limit}/{cd}" data-request="GET" data-container="div#get-users-limit-offset" data-form="form#get-users-limit-offset">
+							  <i class="right arrow icon"></i>
+							  Tester
+							</a>
+							<div id="get-users-limit-offset" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- GET MODIFS-->
+				<div class="title">
+					<div class="ui grid get">
+						<div class="ui column center aligned one wide request">GET</div>
+						<div class="ui column six wide url"><code>/user/modif/{timestamp}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Savoir si des modifications ont eu lieu</i></div>
+					</div>
+				</div>
+				<div class="get-content content"><br>
+					<div style="margin:15px;">
+						<h4><i class="tag icon"></i>Description</h4>
+						<p>Permet de savoir si il y a eu des modifications sur un ou des utilisateurs (ajout/suppression/modification), depuis le timestamp passé en paramètre.</p>
+
+						<div class="ui divider"></div>
+
+						<h4><i class="settings icon"></i>Paramètres</h4>
+						<form class="ui form" id="get-users-modif">
+							<table class="ui celled table">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>timestamp</code></td>
+										<td><input type="text" name="param-timestamp" data-default=" " placeholder="timestamp"></td>
+										<td>Timestamp de la dernière verification</td>
+									</tr>
+								</tbody>
+							</table>
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/modif/{timestamp}" data-request="GET" data-container="div#get-users-modif" data-form="form#get-users-modif">
+							  <i class="right arrow icon"></i>
+							  Tester
+							</a>
+							<div id="get-users-modif" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -100,7 +292,7 @@
 					</div>
 				</div>
 				
-				<!-- GET-->
+				<!-- GET QUIZZES-->
 				<div class="title">
 					<div class="ui grid get">
 						<div class="ui column center aligned one wide request">GET</div>
@@ -145,7 +337,7 @@
 					</div>
 				</div>
 
-				<!-- GET-->
+				<!-- GET ONE MEMBER-->
 				<div class="title">
 					<div class="ui grid get">
 						<div class="ui column center aligned one wide request">GET</div>
@@ -156,7 +348,7 @@
 				<div class="get-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Rechercher un utilisateur spécifique dans la base de données, par son <code>id</code>, et donner le membre spécifié.</p>
+						<p>Rechercher un utilisateur spécifique dans la base de données, par son <code>id</code>, et donner le membre spécifié. Ici, il s'agi de membre retournant une valeur "simple".</p>
 
 						<div class="ui divider"></div>
 
@@ -187,10 +379,6 @@
 													<option value="mail">Mail</option>
 													<option value="password">Mot de Passe</option>
 													<option value="rang">Rang</option>
-													<option value="questions">Questions</option>
-													<option value="questionnaires">Questionnaires</option>
-													<option value="realisations">Réalisations</option>
-													<option value="groupes">Groupes</option>
 												</select>
 												<input type="hidden" value="id" data-default="id" name="param-member" id="param-member-get-users-member">
 											</div>
@@ -209,6 +397,71 @@
 							  Tester
 							</a>
 							<div id="get-users-member" style="margin-top:15px">
+								<div class="msg"></div>
+								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- GET ALL MEMBER-->
+				<div class="title">
+					<div class="ui grid get">
+						<div class="ui column center aligned one wide request">GET</div>
+						<div class="ui column six wide url"><code>/user/{id}/all/{member}</code></div>
+						<div class="ui column right aligned nine wide description"><i>Récupérer le membre d'un utilisateur par son <code>id</code></i></div>
+					</div>
+				</div>
+				<div class="get-content content"><br>
+					<div style="margin:15px;">
+						<h4><i class="tag icon"></i>Description</h4>
+						<p>Rechercher un utilisateur spécifique dans la base de données, par son <code>id</code>, et donner le membre spécifié. Ici, il s'agi de membre retournant une liste d'éléments.</p>
+
+						<div class="ui divider"></div>
+
+						<h4><i class="settings icon"></i>Paramètres</h4>
+						<form class="ui form" id="get-users-member-all">
+							<table class="ui celled table">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>id</code></td>
+										<td><input type="text" name="param-id" data-default="" placeholder="id"></td>
+										<td>Identifiant de l'utilisateur à rechercher</td>
+									</tr>
+									<tr>
+										<td><code>member</code></td>
+										<td>
+											<div class="field">
+												<select class="ui dropdown" name="param-gr-member" data-field="#param-member-get-users-member-all">
+													<option value="questions">Questions</option>
+													<option value="questionnaires">Questionnaires</option>
+													<option value="realisations">Réalisations</option>
+													<option value="groupes">Groupes</option>
+												</select>
+												<input type="hidden" value="id" data-default="id" name="param-member" id="param-member-get-users-member-all">
+											</div>
+										</td>
+										<td>Membre de l'utilisateur à afficher</td>
+									</tr>
+									<tr>
+										<td><b>(Optionnel)</b> <code>cd</code></td>
+										<td><input type="text" name="param-cd" data-default="1" placeholder="cd"></td>
+										<td>"Constraint Depth" = profondeur de recherche des entités liées.<br> <b>Défaut : </b> 1</td>
+									</tr>
+								</tbody>
+							</table>
+							<a class="ui right labeled icon button blue btn-ajax" data-ajax="user/{id}/all/{member}/{cd}" data-request="GET" data-container="div#get-users-member-all" data-form="form#get-users-member-all">
+							  <i class="right arrow icon"></i>
+							  Tester
+							</a>
+							<div id="get-users-member-all" style="margin-top:15px">
 								<div class="msg"></div>
 								<pre style="max-height:300px;display:none; padding:0"><code class="highlight" style="margin:0"></code></pre>
 							</div>
