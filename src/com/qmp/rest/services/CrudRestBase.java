@@ -1,6 +1,7 @@
 package com.qmp.rest.services;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.function.Function;
 
 import javax.ws.rs.Consumes;
@@ -113,6 +114,7 @@ public abstract class CrudRestBase extends RestBase {
 			KoSession.update(object);
 			 this.context.setAttribute(kobjectClass.getSimpleName(), System.currentTimeMillis());
 			message = returnValue(KString.capitalizeFirstLetter(displayName) + " `" + object + "` mis à jour", displayName, object);
+			this.context.setAttribute(kobjectClass.getSimpleName(), new Date().getTime());
 		} catch (SecurityException | IllegalAccessException | SQLException e) {
 			message = returnMessage(e.getMessage(), true);
 		}
@@ -136,6 +138,7 @@ public abstract class CrudRestBase extends RestBase {
 			KoSession.add(object);
 			this.context.setAttribute(kobjectClass.getSimpleName(), System.currentTimeMillis());
 			message = returnValue(KString.capitalizeFirstLetter(displayName) + " `" + object + "` inséré", displayName, object);
+			this.context.setAttribute(kobjectClass.getSimpleName(), new Date().getTime());
 		} catch (SecurityException | IllegalAccessException | SQLException | InstantiationException e) {
 			message = returnMessage(e.getMessage(), true);
 		}
@@ -158,6 +161,7 @@ public abstract class CrudRestBase extends RestBase {
 		try {
 			KoSession.delete(object);
 			message = returnValue(KString.capitalizeFirstLetter(displayName) + " `" + object + "` supprimé", displayName, object);
+			this.context.setAttribute(kobjectClass.getSimpleName(), new Date().getTime());
 		} catch (SQLException e) {
 			message = returnMessage(e.getMessage(), true);
 		}
