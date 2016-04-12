@@ -107,7 +107,7 @@
 				<div class="get-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Donne le nombre d'utilisateurs enresgitrés dans la base (avec borne maximum et minimum).</p>
+						<p>Récupère les utilisateurs enresgitrés dans la base (avec borne maximum et minimum).</p>
 
 						<div class="ui divider"></div>
 
@@ -152,7 +152,7 @@
 				<div class="get-content content"><br>
 					<div style="margin:15px;">
 						<h4><i class="tag icon"></i>Description</h4>
-						<p>Donne le nombre d'utilisateurs enresgitrés dans la base (avec borne maximum et minimum).</p>
+						<p>Récupère les utilisateurs enresgitrés dans la base (avec borne maximum et minimum).</p>
 
 						<div class="ui divider"></div>
 
