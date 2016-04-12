@@ -1,6 +1,5 @@
 <h3>Utilisateurs API</h3>
 
-<input type="text"/>
 <div class="ui container">
 	<div class="row">
 		<div class="column">
