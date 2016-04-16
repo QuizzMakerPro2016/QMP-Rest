@@ -12,6 +12,8 @@ import javax.ws.rs.core.MediaType;
 import net.ko.framework.Ko;
 import net.ko.framework.KoSession;
 import net.ko.kobject.KListObject;
+
+import com.qmp.lib.JBCrypt;
 import com.qmp.rest.models.KGroupe;
 import com.qmp.rest.models.KQuestionnaire;
 import com.qmp.rest.models.KUtilisateur;
@@ -50,8 +52,8 @@ public class User extends CrudRestBase {
 		String result = returnMessage("Login ou mot de passe invalides", true);
 
 		if (user.isLoaded()) {
-			if (user.getPassword().equals(password)) {
-				result = returnValue("Connexion rï¿½ussie de " + user, "utilisateur", user);
+			if (JBCrypt.checkpw(password, user.getPassword())) {
+				result = returnValue("Connexion réussie de " + user, "utilisateur", user);
 			}
 		}
 		return result;
