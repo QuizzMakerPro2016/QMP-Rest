@@ -25,7 +25,7 @@ public class KQuestionnaire extends KRestObject {
 	@Expose
 	private KListObject<KGroupe_questionnaire> groupe_questionnaires;
 	@Expose
-	private KListObject<KQuestion> questions;
+	private KListObject<KQuestion_questionnaire> question_questionnaires;
 	@Expose
 	private KListObject<KRealisation> realisations;
 	@Expose
@@ -34,12 +34,15 @@ public class KQuestionnaire extends KRestObject {
 	private KUtilisateur utilisateur;
 	@Expose
 	private KListObject<KGroupe> groupes;
-
-	
+	@Expose
+	private KListObject<KQuestion> questions;
 	
 	public KQuestionnaire() {
 		super();
-		hasMany(KRealisation.class);hasMany(KGroupe_questionnaire.class);belongsTo(KDomaine.class);
+		hasMany(KRealisation.class);
+		hasMany(KGroupe_questionnaire.class);
+		hasMany(KQuestion_questionnaire.class);
+		belongsTo(KDomaine.class);
 		hasAndBelongsToMany(KQuestion_questionnaire.class, KQuestion.class);
 		hasAndBelongsToMany(KGroupe_questionnaire.class, KGroupe.class);
 		belongsTo(KUtilisateur.class);

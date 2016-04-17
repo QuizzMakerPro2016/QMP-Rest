@@ -5,7 +5,7 @@ package com.qmp.rest.services;
 
 import javax.ws.rs.Path;
 
-import com.qmp.rest.models.KGroupe;
+import com.qmp.rest.models.KQuestion;
 
 
 /**
@@ -15,7 +15,7 @@ import com.qmp.rest.models.KGroupe;
 @Path("/question")
 public class Question extends CrudRestBase {
 	public Question() {
-		kobjectClass = KGroupe.class;
+		kobjectClass = KQuestion.class;
 		displayName = "question";
 	}
 }

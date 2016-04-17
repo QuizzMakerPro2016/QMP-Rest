@@ -28,8 +28,8 @@ public class KQuestion_questionnaire extends KRestObject {
 	
 	public KQuestion_questionnaire() {
 		super();
-		belongsTo(KQuestionnaire.class);
 		belongsTo(KQuestion.class);
+		belongsTo(KQuestionnaire.class);
 	}
 	
 	
