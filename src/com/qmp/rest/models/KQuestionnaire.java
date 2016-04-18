@@ -22,9 +22,7 @@ public class KQuestionnaire extends KRestObject {
 	private String libelle;
 	@Expose
 	private KDomaine domaine;
-	@Expose
 	private KListObject<KGroupe_questionnaire> groupe_questionnaires;
-	@Expose
 	private KListObject<KQuestion_questionnaire> question_questionnaires;
 	@Expose
 	private KListObject<KRealisation> realisations;
@@ -40,10 +38,8 @@ public class KQuestionnaire extends KRestObject {
 	public KQuestionnaire() {
 		super();
 		hasMany(KRealisation.class);
-		hasMany(KGroupe_questionnaire.class);
-		hasMany(KQuestion_questionnaire.class);
+		hasAndBelongsToMany("questions", KQuestion.class, KQuestion_questionnaire.class, "id", "question", "id", "idQuestionnaire", "idQuestion");
 		belongsTo(KDomaine.class);
-		hasAndBelongsToMany(KQuestion_questionnaire.class, KQuestion.class);
 		hasAndBelongsToMany(KGroupe_questionnaire.class, KGroupe.class);
 		belongsTo(KUtilisateur.class);
 	}
