@@ -3,6 +3,7 @@ package com.qmp.rest.services;
 import java.sql.SQLException;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import net.ko.framework.KoHttp;
 import net.ko.framework.KoSession;
+import net.ko.kobject.KObject;
 
 import com.qmp.rest.models.KQuestion_questionnaire;
 
@@ -30,10 +32,11 @@ public class QuestionQuizz extends CrudRestBase {
 		kobjectClass = KQuestion_questionnaire.class;
 		displayName = "questquizz";
 	}
-	
+
 	/**
 	 * 
-	 * @param id
+	 * @param idQuestion
+	 * @param idQuizz
 	 * @return
 	 */
 	@DELETE
@@ -41,17 +44,35 @@ public class QuestionQuizz extends CrudRestBase {
 	@Path("/{idQuestion}/{idQuizz}")
 	public String delete(@PathParam("idQuestion") int idQuestion, @PathParam("idQuizz") int idQuizz){
 		
-		KQuestion_questionnaire usergroup = KoSession.kloadOne(KQuestion_questionnaire.class, "idQuestion=" + String.valueOf(idQuestion) + " AND idQuestion=" + String.valueOf(idQuizz));
-		if(!usergroup.isLoaded()){
-			return "{\"message\": \"Error while loading Answer with idQuestion =  " + String.valueOf(idQuestion) + " and idQuizz =  " + String.valueOf(idQuizz) + "\"}";
+		KQuestion_questionnaire object = KoSession.kloadOne(KQuestion_questionnaire.class, "idQuestion=" + String.valueOf(idQuestion) + " AND idQuestionnaire=" + String.valueOf(idQuizz));
+		if(!object.isLoaded()){
+			return "{\"message\": \"Error while loading Relation with idQuestion =  " + String.valueOf(idQuestion) + " and idQuizz =  " + String.valueOf(idQuizz) + "\"}";
 		}else{
 			try {
-				KoHttp.getDao(KQuestion_questionnaire.class).delete(usergroup);
-			} catch (SQLException e) {
+				KoHttp.getInstance().getDatabase().execute("DELETE FROM question_questionnaire WHERE idQuestion="+String.valueOf(idQuestion)+ " AND idQuestionnaire="+String.valueOf(idQuizz));
+			} catch (Exception e) {
 				return "{\"message\": \"" + e.getMessage() + "\"}";
 			}
 		}
 		
 		return "{\"message\": \"Delete OK\"}";
+	}
+	
+	/**
+	 * 
+	 * @param idQuestion
+	 * @param idQuizz
+	 * @return
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/exist/{idQuestion}/{idQuizz}")
+	public String get(@PathParam("idQuestion") int idQuestion, @PathParam("idQuizz") int idQuizz){
+		
+		KQuestion_questionnaire object = KoSession.kloadOne(KQuestion_questionnaire.class, "idQuestion=" + String.valueOf(idQuestion) + " AND idQuestionnaire=" + String.valueOf(idQuizz));
+		if (object.isLoaded())
+			return "true";
+		else
+			return "false";
 	}
 }

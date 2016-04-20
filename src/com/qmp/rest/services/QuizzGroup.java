@@ -3,6 +3,7 @@ package com.qmp.rest.services;
 import java.sql.SQLException;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -42,17 +43,35 @@ public class QuizzGroup extends CrudRestBase {
 	@Path("/{idGroup}/{idQuizz}")
 	public String delete(@PathParam("idGroup") int idGroup, @PathParam("idQuizz") int idQuizz){
 		
-		KGroupe_questionnaire usergroup = KoSession.kloadOne(KGroupe_questionnaire.class, "idGroup=" + String.valueOf(idGroup) + " AND idQuizz=" + String.valueOf(idQuizz));
+		KGroupe_questionnaire usergroup = KoSession.kloadOne(KGroupe_questionnaire.class, "idGroup=" + String.valueOf(idGroup) + " AND idQuestionnaire=" + String.valueOf(idQuizz));
 		if(!usergroup.isLoaded()){
 			return "{\"message\": \"Error while loading Answer with idGroup =  " + String.valueOf(idGroup) + " and idQuizz =  " + String.valueOf(idQuizz) + "\"}";
 		}else{
 			try {
-				KoHttp.getDao(KGroupe_questionnaire.class).delete(usergroup);
-			} catch (SQLException e) {
+				KoHttp.getInstance().getDatabase().execute("DELETE FROM groupe_questionnaire WHERE idGroup="+String.valueOf(idGroup)+ " AND idQuestionnaire="+String.valueOf(idQuizz));
+			} catch (Exception e) {
 				return "{\"message\": \"" + e.getMessage() + "\"}";
 			}
 		}
 		
 		return "{\"message\": \"Delete OK\"}";
+	}
+	
+	/**
+	 * 
+	 * @param idGroup
+	 * @param idQuizz
+	 * @return
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/exist/{idGroup}/{idQuizz}")
+	public String get(@PathParam("idGroup") int idGroup, @PathParam("idQuizz") int idQuizz){
+		
+		KQuestion_questionnaire object = KoSession.kloadOne(KQuestion_questionnaire.class, "idGroup=" + String.valueOf(idGroup) + " AND idQuestionnaire=" + String.valueOf(idQuizz));
+		if (object.isLoaded())
+			return "true";
+		else
+			return "false";
 	}
 }
