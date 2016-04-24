@@ -43,12 +43,12 @@ public class QuizzGroup extends CrudRestBase {
 	@Path("/{idGroup}/{idQuizz}")
 	public String delete(@PathParam("idGroup") int idGroup, @PathParam("idQuizz") int idQuizz){
 		
-		KGroupe_questionnaire usergroup = KoSession.kloadOne(KGroupe_questionnaire.class, "idGroup=" + String.valueOf(idGroup) + " AND idQuestionnaire=" + String.valueOf(idQuizz));
+		KGroupe_questionnaire usergroup = KoSession.kloadOne(KGroupe_questionnaire.class, "idGroupe=" + String.valueOf(idGroup) + " AND idQuestionnaire=" + String.valueOf(idQuizz));
 		if(!usergroup.isLoaded()){
-			return "{\"message\": \"Error while loading Answer with idGroup =  " + String.valueOf(idGroup) + " and idQuizz =  " + String.valueOf(idQuizz) + "\"}";
+			return "{\"message\": \"Error while loading Relation with idGroup =  " + String.valueOf(idGroup) + " and idQuizz =  " + String.valueOf(idQuizz) + "\"}";
 		}else{
 			try {
-				KoHttp.getInstance().getDatabase().execute("DELETE FROM groupe_questionnaire WHERE idGroup="+String.valueOf(idGroup)+ " AND idQuestionnaire="+String.valueOf(idQuizz));
+				KoHttp.getInstance().getDatabase().execute("DELETE FROM groupe_questionnaire WHERE idGroupe="+String.valueOf(idGroup)+ " AND idQuestionnaire="+String.valueOf(idQuizz));
 			} catch (Exception e) {
 				return "{\"message\": \"" + e.getMessage() + "\"}";
 			}

@@ -49,7 +49,7 @@ public class UserGroup extends CrudRestBase {
 		
 		KGroupe_utilisateur usergroup = KoSession.kloadOne(KGroupe_utilisateur.class, "idUtilisateur=" + String.valueOf(idUser) + " AND idGroupe=" + String.valueOf(idGroup));
 		if(!usergroup.isLoaded()){
-			return "{\"message\": \"Error while loading Answer with idUser =  " + String.valueOf(idUser) + " and idGroup =  " + String.valueOf(idGroup) + "\"}";
+			return "{\"message\": \"Error while loading Relation with idUser =  " + String.valueOf(idUser) + " and idGroup =  " + String.valueOf(idGroup) + "\"}";
 		}else{
 			try {
 				KoHttp.getInstance().getDatabase().execute("DELETE FROM groupe_utilisateur WHERE idUtilisateur="+String.valueOf(idUser)+ " AND idGroupe="+String.valueOf(idGroup));
