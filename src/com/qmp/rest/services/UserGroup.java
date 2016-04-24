@@ -33,7 +33,7 @@ public class UserGroup extends CrudRestBase {
 	 * @throws SQLException
 	 */
 	public UserGroup() {
-		kobjectClass = KGroupe.class;
+		kobjectClass = KGroupe_utilisateur.class;
 		displayName = "usergroup";
 	}
 	
