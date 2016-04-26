@@ -21,6 +21,8 @@ public class KQuestionnaire extends KRestObject {
 	@Expose
 	private String libelle;
 	@Expose
+	private String description;
+	@Expose
 	private KDomaine domaine;
 	private KListObject<KGroupe_questionnaire> groupe_questionnaires;
 	private KListObject<KQuestion_questionnaire> question_questionnaires;
@@ -34,6 +36,7 @@ public class KQuestionnaire extends KRestObject {
 	private KListObject<KGroupe> groupes;
 	@Expose
 	private KListObject<KQuestion> questions;
+
 	
 	public KQuestionnaire() {
 		super();
@@ -63,6 +66,13 @@ public class KQuestionnaire extends KRestObject {
 	 */
 	public String getLibelle(){
 		return this.libelle;
+	}
+	/**
+	 * return the value of description
+	 * @return description
+	 */
+	public String getDescription(){
+		return this.description;
 	}
 	/**
 	 * return the value of domaine
@@ -113,6 +123,13 @@ public class KQuestionnaire extends KRestObject {
 	 */
 	public void setLibelle(String aLibelle){
 		this.libelle=aLibelle;
+	}
+	/**
+	 * set the value of description
+	 * @param aDescription
+	 */
+	public void setDescription(String aDescription){
+		this.description=aDescription;
 	}
 	/**
 	 * set the value of domaine
