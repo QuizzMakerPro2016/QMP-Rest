@@ -248,6 +248,16 @@ public abstract class CrudRestBase extends RestBase {
 		String result = gson.toJson(objects.asAL());
 		return result;
 	}
+	
+	@GET
+	@Path("/limit/{offset}/{limit}/{cd}/{order}/{type}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllLimitOffestOrdered(@PathParam("offset") Integer offset, @PathParam("limit") Integer limit,@PathParam("cd") Integer cd, @PathParam("order") String order, @PathParam("type") String type ) {
+		Ko.setTempConstraintDeph(cd);
+		KListObject<? extends KObject> objects = KoSession.kloadMany(kobjectClass, "1=1 ORDER BY "+order+" "+type+" LIMIT " + offset + "," + limit);
+		String result = gson.toJson(objects.asAL());
+		return result;
+	}
 
 	@GET
 	@Path("/limit/{limit}")
