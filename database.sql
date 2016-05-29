@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 08 Mars 2016 à 14:37
+-- Généré le :  Dim 29 Mai 2016 à 16:21
 -- Version du serveur :  5.6.21
 -- Version de PHP :  5.6.3
 
@@ -22,10 +22,13 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `rest-qcm` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `rest-qcm`;
 
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `domaine`
 --
 
+DROP TABLE IF EXISTS `domaine`;
 CREATE TABLE IF NOT EXISTS `domaine` (
 `id` int(11) NOT NULL,
   `libelle` text NOT NULL
@@ -37,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `domaine` (
 
 INSERT INTO `domaine` (`id`, `libelle`) VALUES
 (4, 'Programmation'),
-(5, 'Reseau');
+(5, 'Reseaux');
 
 -- --------------------------------------------------------
 
@@ -45,11 +48,12 @@ INSERT INTO `domaine` (`id`, `libelle`) VALUES
 -- Structure de la table `groupe`
 --
 
+DROP TABLE IF EXISTS `groupe`;
 CREATE TABLE IF NOT EXISTS `groupe` (
 `id` int(11) NOT NULL,
   `libelle` varchar(250) NOT NULL,
   `code` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `groupe`
@@ -57,7 +61,8 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 
 INSERT INTO `groupe` (`id`, `libelle`, `code`) VALUES
 (3, 'sio.slam', 'slam'),
-(4, 'sio.sisr', 'sisr');
+(4, 'sio.sisr', 'sisr'),
+(5, 'aze', 'za');
 
 -- --------------------------------------------------------
 
@@ -65,6 +70,7 @@ INSERT INTO `groupe` (`id`, `libelle`, `code`) VALUES
 -- Structure de la table `groupe_questionnaire`
 --
 
+DROP TABLE IF EXISTS `groupe_questionnaire`;
 CREATE TABLE IF NOT EXISTS `groupe_questionnaire` (
   `idGroupe` int(11) NOT NULL,
   `idQuestionnaire` int(11) NOT NULL
@@ -76,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `groupe_questionnaire` (
 
 INSERT INTO `groupe_questionnaire` (`idGroupe`, `idQuestionnaire`) VALUES
 (3, 3),
-(3, 4);
+(5, 3),
+(5, 4);
 
 -- --------------------------------------------------------
 
@@ -84,6 +91,7 @@ INSERT INTO `groupe_questionnaire` (`idGroupe`, `idQuestionnaire`) VALUES
 -- Structure de la table `groupe_utilisateur`
 --
 
+DROP TABLE IF EXISTS `groupe_utilisateur`;
 CREATE TABLE IF NOT EXISTS `groupe_utilisateur` (
   `idUtilisateur` int(11) NOT NULL,
   `idGroupe` int(11) NOT NULL
@@ -97,7 +105,13 @@ INSERT INTO `groupe_utilisateur` (`idUtilisateur`, `idGroupe`) VALUES
 (3, 3),
 (4, 3),
 (5, 4),
-(6, 4);
+(6, 4),
+(7, 5),
+(11, 5),
+(14, 5),
+(16, 5),
+(17, 5),
+(18, 5);
 
 -- --------------------------------------------------------
 
@@ -105,22 +119,29 @@ INSERT INTO `groupe_utilisateur` (`idUtilisateur`, `idGroupe`) VALUES
 -- Structure de la table `question`
 --
 
+DROP TABLE IF EXISTS `question`;
 CREATE TABLE IF NOT EXISTS `question` (
 `id` int(11) NOT NULL,
   `libelle` text NOT NULL,
-  `idQuestionnaire` int(11) NOT NULL,
-  `type` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `type` tinyint(1) NOT NULL,
+  `idUtilisateur` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `question`
 --
 
-INSERT INTO `question` (`id`, `libelle`, `idQuestionnaire`, `type`) VALUES
-(1, 'a quoi sert ngDblclick ?', 3, 0),
-(2, 'a quoi sert ngCloak ?', 3, 0),
-(3, 'Qu’est-ce qu’est Phalcon ?', 4, 0),
-(4, 'Quelle est le langage de Phalcon ?', 4, 0);
+INSERT INTO `question` (`id`, `libelle`, `type`, `idUtilisateur`) VALUES
+(1, 'a quoi sert ngDblclick ?', 0, 4),
+(2, 'a quoi sert ngCloak ?', 0, 4),
+(3, 'Qu’est-ce qu’est Phalcon ?', 0, 4),
+(4, 'Quel est le langage de Phalcon ?', 1, 4),
+(6, 'Test de question', 1, 4),
+(9, 'Nouvelle Questionsssss', 1, 4),
+(10, 'test', 1, 4),
+(11, 'TEST', 1, 4),
+(12, 'Ma Question', 1, 4),
+(13, 'Ma Question 2', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -128,20 +149,52 @@ INSERT INTO `question` (`id`, `libelle`, `idQuestionnaire`, `type`) VALUES
 -- Structure de la table `questionnaire`
 --
 
+DROP TABLE IF EXISTS `questionnaire`;
 CREATE TABLE IF NOT EXISTS `questionnaire` (
 `id` int(11) NOT NULL,
   `libelle` text NOT NULL,
+  `description` text,
   `idDomaine` int(11) NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idUtilisateur` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `questionnaire`
 --
 
-INSERT INTO `questionnaire` (`id`, `libelle`, `idDomaine`, `date`) VALUES
-(3, 'angularJS', 4, '2015-03-12'),
-(4, 'Phalcon', 4, '2015-03-12');
+INSERT INTO `questionnaire` (`id`, `libelle`, `description`, `idDomaine`, `date`, `idUtilisateur`) VALUES
+(3, 'angularJS', 'Test de description', 4, '2015-03-12 00:00:00', 4),
+(4, 'Phalcon', NULL, 4, '2015-03-12 00:00:00', 4),
+(5, 'angularJS', 'Description de Angular', 4, '2016-05-01 00:00:00', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `question_questionnaire`
+--
+
+DROP TABLE IF EXISTS `question_questionnaire`;
+CREATE TABLE IF NOT EXISTS `question_questionnaire` (
+  `idQuestion` int(11) NOT NULL,
+  `idQuestionnaire` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `question_questionnaire`
+--
+
+INSERT INTO `question_questionnaire` (`idQuestion`, `idQuestionnaire`) VALUES
+(1, 3),
+(1, 4),
+(2, 4),
+(3, 3),
+(4, 3),
+(6, 4),
+(9, 4),
+(11, 3),
+(12, 3),
+(13, 3);
 
 -- --------------------------------------------------------
 
@@ -149,6 +202,7 @@ INSERT INTO `questionnaire` (`id`, `libelle`, `idDomaine`, `date`) VALUES
 -- Structure de la table `rang`
 --
 
+DROP TABLE IF EXISTS `rang`;
 CREATE TABLE IF NOT EXISTS `rang` (
 `id` int(11) NOT NULL,
   `libelle` varchar(250) NOT NULL
@@ -168,6 +222,7 @@ INSERT INTO `rang` (`id`, `libelle`) VALUES
 -- Structure de la table `realisation`
 --
 
+DROP TABLE IF EXISTS `realisation`;
 CREATE TABLE IF NOT EXISTS `realisation` (
 `id` int(11) NOT NULL,
   `idUtilisateur` int(11) NOT NULL,
@@ -192,12 +247,13 @@ INSERT INTO `realisation` (`id`, `idUtilisateur`, `idQuestionnaire`, `score`, `d
 -- Structure de la table `reponse`
 --
 
+DROP TABLE IF EXISTS `reponse`;
 CREATE TABLE IF NOT EXISTS `reponse` (
 `id` int(11) NOT NULL,
   `libelle` text NOT NULL,
   `idQuestion` int(11) NOT NULL,
   `good` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `reponse`
@@ -219,7 +275,14 @@ INSERT INTO `reponse` (`id`, `libelle`, `idQuestion`, `good`) VALUES
 (13, 'PHP', 4, 1),
 (14, 'JAVA', 4, 0),
 (15, 'C++', 4, 0),
-(16, 'python', 4, 0);
+(16, 'python', 4, 0),
+(17, 'Test de reponse', 6, 1),
+(19, 'Nouvelle Réponse', 9, 1),
+(20, 'PHP', 11, 1),
+(22, 'Ma Réponse', 12, 1),
+(23, 'A', 13, 1),
+(24, 'B', 13, 0),
+(25, 'C', 13, 0);
 
 -- --------------------------------------------------------
 
@@ -227,6 +290,7 @@ INSERT INTO `reponse` (`id`, `libelle`, `idQuestion`, `good`) VALUES
 -- Structure de la table `reponse_utilisateur`
 --
 
+DROP TABLE IF EXISTS `reponse_utilisateur`;
 CREATE TABLE IF NOT EXISTS `reponse_utilisateur` (
   `idReponse` int(11) NOT NULL,
   `idRealisation` int(11) NOT NULL
@@ -252,26 +316,37 @@ INSERT INTO `reponse_utilisateur` (`idReponse`, `idRealisation`) VALUES
 -- Structure de la table `utilisateur`
 --
 
+DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
 `id` int(11) NOT NULL,
   `mail` varchar(150) NOT NULL,
-  `password` varchar(60) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `nom` varchar(45) DEFAULT NULL,
   `prenom` varchar(45) DEFAULT NULL,
   `idRang` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `mail`, `password`, `nom`, `prenom`, `idRang`) VALUES
-(3, 'jcouture', '123456', 'couture', 'julien', 1),
-(4, 'gtostain', '123456', 'tostain', 'guillaume', 1),
-(5, 'tportois', '123456', 'portois', 'théo', 1),
-(6, 'utilisateur', '123456', 'nom1', 'prenom1', 2),
+(3, 'jcouture-up-up-up-up-up-up-up-up', '123456-up-up-up-up-up-up-up-up', 'couture-up-up-up-up-up-up-up-up', 'julien-up-up-up-up-up-up-up-up', 1),
+(4, 'gtostain', '$2a$10$AcRQ0srRzjrRrB2xDP/F/uQ6mL5Tvn4dumDGEC3MKha1HSJxj7Tde', 'tostain', 'guillaume', 1),
+(5, 'zeaze', 'zaezae', 'azezae', 'zaeaze', 2),
+(6, 'utilisateur', '123456', 'nom1', 'prenom1', 1),
 (7, 'myaddressmail@gmail.com', '11nTgPwwTDGCo', 'HERON', 'Jean-Christophe', 2),
-(8, 'myaddressmail@gmail.com', '19SXSHaOnQl/c', 'HERON', 'Jean-Christophe', 2);
+(8, 'myaddressmail@gmail.com', '19SXSHaOnQl/c', 'Test', 'Jean-Christophe', 2),
+(9, 'mailTest', 'passTest', 'nameTest', 'nameTest', 1),
+(10, 'mailTest', 'passTest', 'nameTest', 'nameTest', 1),
+(11, 'mailTest', 'passTest', 'nameTest', 'nameTest', 1),
+(12, 'mailTest', 'passTest', 'nameTest', 'nameTest', 1),
+(13, 'mailTest', 'passTest', 'nameTest2', 'nameTest2', 1),
+(14, 'mailTest', 'passTest', 'nameTest', 'nameTest', 1),
+(16, 'mailTest', 'passTest', 'nameTest', 'nameTest', 1),
+(17, 'mailTest', 'passTest', 'nameTest', 'nameTest', 1),
+(18, 'eza', '$2a$10$gGUJ7COmLnDdBw.MfuKcKeE76FxUvu8v39CHxJpuYuVVUvQDvBDmu', 'eaz', 'eza', 2),
+(19, 'a', '$2a$10$ywmV5vE6nSj5vTqP2mmcgepDZR.8JCb6h21VmvGeZUpV5fdsAtvAa', 'a', 'a', 2);
 
 --
 -- Index pour les tables exportées
@@ -305,13 +380,19 @@ ALTER TABLE `groupe_utilisateur`
 -- Index pour la table `question`
 --
 ALTER TABLE `question`
- ADD PRIMARY KEY (`id`), ADD KEY `fk_question_questionnaire1_idx` (`idQuestionnaire`);
+ ADD PRIMARY KEY (`id`), ADD KEY `createdBy` (`idUtilisateur`);
 
 --
 -- Index pour la table `questionnaire`
 --
 ALTER TABLE `questionnaire`
- ADD PRIMARY KEY (`id`), ADD KEY `fk_questionnaire_domaine1_idx` (`idDomaine`);
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_questionnaire_domaine1_idx` (`idDomaine`), ADD KEY `createdBy` (`idUtilisateur`);
+
+--
+-- Index pour la table `question_questionnaire`
+--
+ALTER TABLE `question_questionnaire`
+ ADD KEY `idQuestion` (`idQuestion`), ADD KEY `idQuestionnaire` (`idQuestionnaire`);
 
 --
 -- Index pour la table `rang`
@@ -356,17 +437,17 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT pour la table `groupe`
 --
 ALTER TABLE `groupe`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `question`
 --
 ALTER TABLE `question`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `questionnaire`
 --
 ALTER TABLE `questionnaire`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `rang`
 --
@@ -381,12 +462,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- Contraintes pour les tables exportées
 --
@@ -409,13 +490,21 @@ ADD CONSTRAINT `fk_utilisateur_has_groupe_utilisateur1` FOREIGN KEY (`idUtilisat
 -- Contraintes pour la table `question`
 --
 ALTER TABLE `question`
-ADD CONSTRAINT `fk_question_questionnaire1` FOREIGN KEY (`idQuestionnaire`) REFERENCES `questionnaire` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `questionnaire`
 --
 ALTER TABLE `questionnaire`
-ADD CONSTRAINT `fk_questionnaire_domaine1` FOREIGN KEY (`idDomaine`) REFERENCES `domaine` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_questionnaire_domaine1` FOREIGN KEY (`idDomaine`) REFERENCES `domaine` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `questionnaire_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `question_questionnaire`
+--
+ALTER TABLE `question_questionnaire`
+ADD CONSTRAINT `question_questionnaire_ibfk_1` FOREIGN KEY (`idQuestion`) REFERENCES `question` (`id`),
+ADD CONSTRAINT `question_questionnaire_ibfk_2` FOREIGN KEY (`idQuestionnaire`) REFERENCES `questionnaire` (`id`);
 
 --
 -- Contraintes pour la table `realisation`
